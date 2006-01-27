@@ -1,0 +1,60 @@
+use Test::More tests => 5;
+
+use strict;
+use warnings;
+
+use_ok("Number::Tolerant");
+
+my $number = Number::Tolerant->_number_re;
+
+package Number::Tolerant::Type::through;
+	use base qw(Number::Tolerant);
+	Number::Tolerant->_tolerance_type->{'Number::Tolerant::Type::through'} = 1;
+
+	sub construct { shift;
+		($_[0],$_[1]) = sort { $a <=> $b } ($_[0],$_[1]);
+		{
+			value    => ($_[0]+$_[1])/2,
+			variance => $_[1] - ($_[0]+$_[1])/2,
+			min      => $_[0],
+			max      => $_[1]
+		}
+	}
+
+	sub parse { shift;
+		tolerance("$1", 'through', "$2") if ($_[0] =~ m!\A($number) to ($number)\Z!)
+	}
+
+	sub stringify { "$_[0]->{min} through $_[0]->{max}" }
+
+	sub valid_args { shift;
+		return ($_[0],$_[2])
+			if ((grep { defined } @_) == 3)
+			and ($_[0] =~ $number) and ($_[1] eq 'through') and ($_[2] =~ $number);
+		return;
+	}
+package main;
+
+isa_ok(
+	tolerance(8 => through => 10),
+	'Number::Tolerant'
+);
+
+ok(
+	9 == tolerance(8 => through => 10),
+	"'through' tolerance works, trivially"
+);
+
+Number::Tolerant->_tolerance_type->{stddev} = {};
+
+is(
+	tolerance(8 => not_here => 10),
+	undef,
+	"not_here not found, even with bad type entry"
+);
+
+is(
+	Number::Tolerant->from_string("10 or so"),
+	undef,
+	"not_here not found, even with bad type entry"
+);
