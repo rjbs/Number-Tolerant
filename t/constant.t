@@ -3,8 +3,8 @@ use Test::More tests => 58;
 use strict;
 use warnings;
 
-use_ok("Number::Tolerant");
-use_ok("Number::Tolerant::Constant");
+BEGIN { use_ok("Number::Tolerant"); }
+BEGIN { use_ok("Number::Tolerant::Constant"); }
 
 { # constant (with Constant)
   { # integer

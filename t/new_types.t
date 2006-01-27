@@ -3,7 +3,7 @@ use Test::More tests => 5;
 use strict;
 use warnings;
 
-use_ok("Number::Tolerant");
+BEGIN { use_ok("Number::Tolerant"); }
 
 my $number = Number::Tolerant->_number_re;
 

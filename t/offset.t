@@ -3,7 +3,7 @@ use Test::More tests => 48;
 use strict;
 use warnings;
 
-use_ok("Number::Tolerant");
+BEGIN { use_ok("Number::Tolerant"); }
 
 my $guess = Number::Tolerant->new(4.75 => offset => (-0.25, 0.75));
 

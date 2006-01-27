@@ -3,7 +3,7 @@ use Test::More tests => 45;
 use strict;
 use warnings;
 
-use_ok("Number::Tolerant");
+BEGIN { use_ok("Number::Tolerant"); }
 
 my $guess = Number::Tolerant->new(5 => plus_or_minus => 0);
 

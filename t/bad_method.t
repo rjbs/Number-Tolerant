@@ -3,7 +3,7 @@ use Test::More tests => 22;
 use strict;
 use warnings;
 
-use_ok("Number::Tolerant");
+BEGIN { use_ok("Number::Tolerant"); }
 
 ## this test right here... it used to test for a bad method
 ## but it ain't like that no more

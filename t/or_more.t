@@ -3,7 +3,7 @@ use Test::More tests => 72;
 use strict;
 use warnings;
 
-use_ok("Number::Tolerant");
+BEGIN { use_ok("Number::Tolerant"); }
 
 { # test parse
   for (">= 5", "x >= 5", "5 <= x") {
