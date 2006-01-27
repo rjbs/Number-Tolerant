@@ -37,13 +37,16 @@ would otherwise complain that the constructor hadn't returned a blessed object.
 my $number = Number::Tolerant->_number_re;
 
 package Number::Tolerant::Type::constant;
+use base qw(Number::Tolerant);
 no warnings 'redefine';
 
 sub construct { shift;
 	{ value => $_[0], min => $_[0], max => $_[0], constant => 1 }
 };
 
-sub parse { shift; $_[0] if ($_[0] =~ m!\A($number)\Z!) }
+sub parse { shift;
+  Number::Tolerant::tolerance$_[0] if ($_[0] =~ m!\A($number)\Z!)
+}
 
 sub stringify { $_[0]->{value} }
 
@@ -51,6 +54,8 @@ sub valid_args { shift;
 	return $_[0] if @_==1 and $_[0] =~ $number;
 	return
 }
+
+Number::Tolerant->_tolerance_type->{'Number::Tolerant::Type::constant'} = 1;
 
 =head1 TODO
 

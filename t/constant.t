@@ -1,10 +1,15 @@
-use Test::More tests => 46;
+use Test::More tests => 47;
 
 use strict;
 use warnings;
 
 use_ok("Number::Tolerant");
 use_ok("Number::Tolerant::Constant");
+
+{ # test parse
+  my $tol = Number::Tolerant::Type::constant->parse("5");
+  isa_ok($tol, 'Number::Tolerant', "the number 5");
+}
 
 my $guess = Number::Tolerant->new(5);
 

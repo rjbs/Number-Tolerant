@@ -1,4 +1,4 @@
-use Test::More tests => 31;
+use Test::More tests => 33;
 
 use strict;
 use warnings;
@@ -89,8 +89,16 @@ BEGIN { use_ok("Number::Tolerant"); }
 }
 
 { # constant
-	is( Number::Tolerant->from_string("10.12"), "10.12", "constant: 10.12");
-	is( Number::Tolerant->from_string("1012"),  "1012",  "constant:  1012");
+  { # integer
+	  my $tol = Number::Tolerant->from_string("1012");
+    is(ref $tol, '', "a constant isn't really blessed");
+    is($tol, "1012", "constant:  1012");
+  }
+  { # rational
+	  my $tol = Number::Tolerant->from_string("10.12");
+    is(ref $tol, '', "a constant isn't really blessed");
+    is($tol, "10.12", "constant: 10.12");
+  }
 }
 
 { # bad string
