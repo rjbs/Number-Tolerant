@@ -354,11 +354,14 @@ through unblessed by default.)
 
 =head1 TODO
 
-Extend C<from_string> to cover unions.
+=over 4
 
-Extend C<from_string> to include Number::Range-type specifications.
 
-Allow translation into forms not originally used:
+=item * Extend C<from_string> to cover unions.
+
+=item * Extend C<from_string> to include Number::Range-type specifications.
+
+=item * Allow translation into forms not originally used:
 
  $range = tolerance(9 => to => 17); 
  $range->convert_to('plus_minus');
@@ -371,6 +374,10 @@ this:
 
 Besides being ugly, it's a side-effect that isn't tested or guaranteed to work
 very often.
+
+=item * Break the basic types into their own modules and use L<Module::Pluggable>.
+
+=back
 
 =head1 SEE ALSO
 
@@ -404,8 +411,8 @@ Ricardo SIGNES, E<lt>rjbs@cpan.orgE<gt>
 
 =head1 COPYRIGHT
 
-(C) 2004, Ricardo SIGNES.  Number::Tolerant is available under the same terms
-as Perl itself.
+(C) 2004-2006, Ricardo SIGNES.  Number::Tolerant is available under the same
+terms as Perl itself.
 
 =cut
 

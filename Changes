@@ -1,5 +1,8 @@
 Revision history for Number::Tolerant
 
+1.44    2006-01-26
+        add "offset" type (largely from a patch by Tom Freedman)
+
 1.42    2004-12-08
         bump requirements to perl 5.8 (5.6 has an overload bug, it seems)
 
