@@ -1,14 +1,20 @@
-MANIFEST                 This list of files
-README
-META.yml                 Module meta-data (added by MakeMaker)
 Changes
-Makefile.PL
-
+inc/Module/Install.pm
+inc/Module/Install/Base.pm
+inc/Module/Install/Can.pm
+inc/Module/Install/Fetch.pm
+inc/Module/Install/Makefile.pm
+inc/Module/Install/Metadata.pm
+inc/Module/Install/Win32.pm
+inc/Module/Install/WriteAll.pm
 lib/Number/Tolerant.pm
 lib/Number/Tolerant/BasicTypes.pm
 lib/Number/Tolerant/Constant.pm
 lib/Number/Tolerant/Union.pm
-
+Makefile.PL
+MANIFEST			This list of files
+META.yml			Module meta-data (added by MakeMaker)
+README
 t/00.load.t
 t/and_constant.t
 t/and_tolerance.t
@@ -16,17 +22,22 @@ t/bad_method.t
 t/constant.t
 t/from_string.t
 t/infinite.t
+t/less_than.t
+t/more_than.t
+t/new_types.t
+t/offset.t
 t/or_less.t
 t/or_more.t
 t/plusminus.t
 t/plusminus_0.t
 t/plusminus_pct.t
 t/plusminus_pct_0.t
-t/pod.t
 t/pod-coverage.t
+t/pod.t
+t/stringify_as.t
 t/union.t
-t/union_more.t
 t/union_and.t
+t/union_more.t
 t/x_to_x.t
 t/x_to_y.t
 t/y_to_x.t
