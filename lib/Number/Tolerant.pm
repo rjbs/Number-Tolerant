@@ -1,10 +1,10 @@
 package Number::Tolerant;
-our $VERSION = "1.42";
+use base qw(Exporter);
 
 use strict;
 use warnings;
 
-use base qw(Exporter);
+our $VERSION = "1.44";
 our @EXPORT = qw(tolerance);
 
 use Carp;
@@ -17,7 +17,7 @@ Number::Tolerant -- tolerance ranges for inexact numbers
 
 version 1.42
 
- $Id: Tolerant.pm,v 1.30 2004/12/08 19:19:20 rjbs Exp $
+ $Id$
 
 =head1 SYNOPSIS
 
@@ -69,11 +69,27 @@ at present:
   less_than         | x to -Inf, not x
   to                | x to y
   infinite          | -Inf to Inf
+  offset            | (x + y1) to (x + y2)
 
 For C<or_less> and C<or_more>, C<$y> is ignored if passed.  For C<infinite>,
 neither C<$x> nor C<$y> is used; "infinite" should be the sole argument.  The
 first two arguments can be reversed for C<more_than> and C<less_than>, to be
 more English-like.
+
+Offset tolerances are slightly unusual.  Here is an example:
+
+  my $offset_tolerance = tolerance(10 => offset => (-3, 5));
+  # stringifies to: 10 (-3 +5)
+
+An offset is very much like a C<plus_or_minus> tolerance, but its center value
+is not necessarily the midpoint between its extremes.  This is significant for
+comparisons and numifications of the tolerance.  Given the following two
+tolerances:
+
+  my $pm_dice = tolerance(10.5 => plus_or_minus => 7.5);
+  my $os_dice = tolerance(11 => offset => (-8, 7));
+
+The first will sort as numerically less than the second.
 
 =cut
 

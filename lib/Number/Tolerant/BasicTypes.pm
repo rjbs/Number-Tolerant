@@ -1,8 +1,9 @@
 package Number::Tolerant::BasicTypes;
-our $VERSION = "1.40";
 
 use strict;
 use warnings;
+
+our $VERSION = "1.44";
 
 use Carp;
 use Number::Tolerant;
@@ -13,9 +14,9 @@ Number::Tolerant::BasicTypes -- basic built-in tolerance types
 
 =head1 VERSION
 
-version 1.40
+version 1.44
 
- $Id: BasicTypes.pm,v 1.4 2004/12/07 20:30:31 rjbs Exp $
+ $Id$
 
 =head1 SYNOPSIS
 
@@ -253,6 +254,46 @@ sub valid_args { shift;
 }
 
 Number::Tolerant->_tolerance_type->{'Number::Tolerant::Type::infinite'}= 1;
+
+package Number::Tolerant::Type::offset;
+use base qw(Number::Tolerant);
+
+sub construct { shift;
+  {
+    value => $_[0],
+    min   => $_[0] + $_[1],
+    max   => $_[0] + $_[2]
+  }
+}
+
+sub parse {
+  my (undef, $string) = @_;
+
+  if ($string =~ m!\A($number)\s+\(?\s*($number)\s+($number)\s*\)?\s*\Z!) {
+    Number::Tolerant::tolerance("$1", 'offset', "$2", "$3")
+  }
+}
+
+sub stringify {
+  my ($self) = @_;
+  return sprintf "%s (-%s +%s)",
+    $_[0]->{value},
+    ($_[0]->{value} - $_[0]->{min}),
+    ($_[0]->{max} - $_[0]->{value});
+}
+
+sub valid_args { shift;
+  return ($_[0],$_[2], $_[3])
+    if  (grep { defined } @_) == 4
+    and $_[0] =~ $number
+    and $_[1] eq 'offset'
+    and $_[2] =~ $number
+    and $_[3] =~ $number;
+
+  return;
+}
+
+Number::Tolerant->_tolerance_type->{'Number::Tolerant::Type::offset'} = 1;
 
 =head1 TODO
 

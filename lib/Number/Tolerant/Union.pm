@@ -12,7 +12,7 @@ Number::Tolerant::Union -- unions of tolerance ranges
 
 version 1.42
 
- $Id: Union.pm,v 1.10 2004/12/08 19:19:20 rjbs Exp $
+ $Id$
 
 =head1 SYNOPSIS
 

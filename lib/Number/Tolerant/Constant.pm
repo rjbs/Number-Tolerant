@@ -13,7 +13,7 @@ Number::Tolerant::Constant -- a blessed constant type
 
 version 1.40
 
- $Id: Constant.pm,v 1.3 2004/12/07 20:46:29 rjbs Exp $
+ $Id$
 
 =head1 SYNOPSIS
 

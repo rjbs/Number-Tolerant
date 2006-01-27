@@ -161,6 +161,7 @@ BEGIN { use_ok("Number::Tolerant"); }
 
 TODO: { # less_than_x & more_than_x
 	local $TODO = "intersections with excluded endpoints aren't done";
+
 	my $demand = Number::Tolerant->new(40 => 'less_than');
 	my $offer  = Number::Tolerant->new(30 => 'more_than');
 
