@@ -61,8 +61,8 @@ at present:
 
   method              range
  -------------------+------------------
-  plus_or_minus     | x ± y
-  plus_or_minus_pct | x ± (y% of x)
+  plus_or_minus     | x Â± y
+  plus_or_minus_pct | x Â± (y% of x)
   or_more           | x to Inf
   or_less           | x to -Inf
   more_than         | x to Inf, not x
@@ -104,31 +104,31 @@ require Number::Tolerant::BasicTypes;
 sub tolerance { __PACKAGE__->new(@_); }
 
 sub new {
-	my $class = shift;
-	return unless @_;
-	my $self;
+  my $class = shift;
+  return unless @_;
+  my $self;
 
-	for my $type (keys %tolerance_type) {
-		next unless $type->can('valid_args');
-		next unless my @args = $type->valid_args(@_);
-		my $guts = $type->construct(@args);
+  for my $type (keys %tolerance_type) {
+    next unless $type->can('valid_args');
+    next unless my @args = $type->valid_args(@_);
+    my $guts = $type->construct(@args);
 
-		return $guts unless ref $guts;
+    return $guts unless ref $guts;
 
-		if (
-			defined $guts->{min} and defined $guts->{max} and
-			$guts->{min} == $guts->{max} and
-			not $guts->{constant}
-		) { 
-			@_ = ($class, $guts->{min});
-			goto &new;
-		}
-		$self = { method => $type, %$guts };
-		last;
-	}
+    if (
+      defined $guts->{min} and defined $guts->{max} and
+      $guts->{min} == $guts->{max} and
+      not $guts->{constant}
+    ) { 
+      @_ = ($class, $guts->{min});
+      goto &new;
+    }
+    $self = { method => $type, %$guts };
+    last;
+  }
 
-	return unless $self;
-	bless $self => $self->{method};
+  return unless $self;
+  bless $self => $self->{method};
 }
 
 =head3 C<< from_string($stringification) >>
@@ -146,29 +146,29 @@ the future.  (I just don't need it yet.)
 =cut
 
 sub from_string {
- 	my ($class, $string) = @_;
- 	croak "from_string is a class method" if ref $class;
-	for my $type (keys %tolerance_type) {
-		next unless $type->can('parse');
-		if (my $tolerance = $type->parse($string)) {
-			return $tolerance;
-		}
-	}
-	return;
+  my ($class, $string) = @_;
+  croak "from_string is a class method" if ref $class;
+  for my $type (keys %tolerance_type) {
+    next unless $type->can('parse');
+    if (my $tolerance = $type->parse($string)) {
+      return $tolerance;
+    }
+  }
+  return;
 }
 
 sub stringify {
-	my ($self) = @_;
-	return 'any number' unless $self->{min} || $self->{max};
-	my $string = '';
-	if ($self->{min}) {
-		$string .= "$self->{min} <" . ($self->{exclude_min} ? '' : '=') . ' ';
-	}
-	$string .= 'x';
-	if ($self->{max}) {
-		$string .= ' <' . ($self->{exclude_max} ? '' : '=') .  " $self->{max}";
-	}
-	return $string;
+  my ($self) = @_;
+  return 'any number' unless $self->{min} || $self->{max};
+  my $string = '';
+  if ($self->{min}) {
+    $string .= "$self->{min} <" . ($self->{exclude_min} ? '' : '=') . ' ';
+  }
+  $string .= 'x';
+  if ($self->{max}) {
+    $string .= ' <' . ($self->{exclude_max} ? '' : '=') .  " $self->{max}";
+  }
+  return $string;
 }
 
 =head2 C<< stringify_as($type) >>
@@ -180,6 +180,21 @@ C<stringify_as('plus_or_minus_pct')> to "10 +/- 10%" for example.
 =cut
 
 sub stringify_as { }
+
+=head2 C<< numify >>
+
+This returns the numeric form of a tolerance.  If a tolerance has both a
+minimum and a maximum, and they are the same, then that is the numification.
+Otherwise, numify returns undef.
+
+=cut
+
+sub numify {
+  # if a tolerance has equal min and max, it numifies to that number
+  return $_[0]{min}
+    if $_[0]{min} and $_[0]{max} and $_[0]{min} == $_[0]{max};
+  return undef;
+}
 
 sub _num_eq  { not( _num_gt($_[0],$_[1]) or _num_lt($_[0],$_[1]) ) }
 
@@ -194,55 +209,55 @@ sub _num_gte { $_[1] == $_[0] ? 1 : goto &_num_gt; }
 sub _num_lte { $_[1] == $_[0] ? 1 : goto &_num_lt; }
 
 sub _num_gt_canonical {
-	return 1 if $_[0]{exclude_min} and $_[0]{min} == $_[1];
-	defined $_[0]->{min} ? $_[1] <  $_[0]->{min} : undef
+  return 1 if $_[0]{exclude_min} and $_[0]{min} == $_[1];
+  defined $_[0]->{min} ? $_[1] <  $_[0]->{min} : undef
 }
 
 sub _num_lt_canonical {
-	return 1 if $_[0]{exclude_max} and $_[0]{max} == $_[1];
-	defined $_[0]->{max} ? $_[1] >  $_[0]->{max} : undef
+  return 1 if $_[0]{exclude_max} and $_[0]{max} == $_[1];
+  defined $_[0]->{max} ? $_[1] >  $_[0]->{max} : undef
 }
 
 sub _union {
-	require Number::Tolerant::Union;
-	return Number::Tolerant::Union->new($_[0],$_[1]);
+  require Number::Tolerant::Union;
+  return Number::Tolerant::Union->new($_[0],$_[1]);
 }
 
 sub _intersection {
-	return $_[0] == $_[1] ? $_[1] : () unless ref $_[1];
+  return $_[0] == $_[1] ? $_[1] : () unless ref $_[1];
 
-	my ($min, $max);
-	my ($exclude_min, $exclude_max);
+  my ($min, $max);
+  my ($exclude_min, $exclude_max);
 
-	if (defined $_[0]->{min} and defined $_[1]->{min}) {
-		($min) = sort {$b<=>$a}  ($_[0]->{min}, $_[1]->{min});
-	} else {
-		$min = $_[0]->{min} || $_[1]->{min};
-	}
-	$exclude_min = 1
-		if ($_[0]{min} and $min == $_[0]{min} and $_[0]{exclude_min})
-		or ($_[1]{min} and $min == $_[1]{min} and $_[1]{exclude_min});
+  if (defined $_[0]->{min} and defined $_[1]->{min}) {
+    ($min) = sort {$b<=>$a}  ($_[0]->{min}, $_[1]->{min});
+  } else {
+    $min = $_[0]->{min} || $_[1]->{min};
+  }
+  $exclude_min = 1
+    if ($_[0]{min} and $min == $_[0]{min} and $_[0]{exclude_min})
+    or ($_[1]{min} and $min == $_[1]{min} and $_[1]{exclude_min});
 
-	if (defined $_[0]->{max} and defined $_[1]->{max}) {
-		($max) = sort {$a<=>$b} ($_[0]->{max}, $_[1]->{max});
-	} else {
-		$max = $_[0]->{max} || $_[1]->{max};
-	}
-	$exclude_max = 1
-		if ($_[0]{max} and $max == $_[0]{max} and $_[0]{exclude_max})
-		or ($_[1]{max} and $max == $_[1]{max} and $_[1]{exclude_max});
+  if (defined $_[0]->{max} and defined $_[1]->{max}) {
+    ($max) = sort {$a<=>$b} ($_[0]->{max}, $_[1]->{max});
+  } else {
+    $max = $_[0]->{max} || $_[1]->{max};
+  }
+  $exclude_max = 1
+    if ($_[0]{max} and $max == $_[0]{max} and $_[0]{exclude_max})
+    or ($_[1]{max} and $max == $_[1]{max} and $_[1]{exclude_max});
 
-	return tolerance('infinite') unless defined $min || defined $max;
-	return tolerance($min => ($exclude_min ? 'more_than' : 'or_more'))
-		unless defined $max;
-	return tolerance($max => ($exclude_max ? 'less_than' : 'or_less'))
-		unless defined $min;
-	bless {
-		max => $max,
-		min => $min,
-		exclude_max => $exclude_max,
-		exclude_min => $exclude_min
-	} => 'Number::Tolerant::Type::to';
+  return tolerance('infinite') unless defined $min || defined $max;
+  return tolerance($min => ($exclude_min ? 'more_than' : 'or_more'))
+    unless defined $max;
+  return tolerance($max => ($exclude_max ? 'less_than' : 'or_less'))
+    unless defined $min;
+  bless {
+    max => $max,
+    min => $min,
+    exclude_max => $exclude_max,
+    exclude_min => $exclude_min
+  } => 'Number::Tolerant::Type::to';
 }
 
 =head2 Overloading
@@ -257,7 +272,7 @@ Tolerances are always true.
 
 =item numify
 
-Most tolerances numify to undef.
+Most tolerances numify to undef; see C<L</numify>>.
 
 =item stringify
 
@@ -313,19 +328,21 @@ L<Number::Tolerant::Union> for more information.
 =cut
 
 use overload
-	fallback => 1,
-	'bool'   => sub { 1 },
-	'0+'  => sub { ($_[0]{min} and $_[0]{max} and $_[0]{min} == $_[0]{max}) ? $_[0]{min} : undef },
-	'<=>' => sub { $_[2] ? ($_[1] <=> $_[0]->{value}) : ($_[0]->{value} <=> $_[1]) },
-	'""' => 'stringify',
-	'==' => '_num_eq',
-	'!=' => '_num_ne',
-	'>'  => '_num_gt',
-	'<'  => '_num_lt',
-	'>=' => '_num_gte',
-	'<=' => '_num_lte',
-	'|'  => '_union',
-	'&'  => '_intersection';
+  fallback => 1,
+  'bool'   => sub { 1 },
+  '0+'     => 'numify',
+  '<=>' => sub {
+    $_[2] ? ($_[1] <=> $_[0]->{value}) : ($_[0]->{value} <=> $_[1])
+  },
+  '""' => 'stringify',
+  '==' => '_num_eq',
+  '!=' => '_num_ne',
+  '>'  => '_num_gt',
+  '<'  => '_num_lt',
+  '>=' => '_num_gte',
+  '<=' => '_num_lte',
+  '|'  => '_union',
+  '&'  => '_intersection';
 
 =back
 
@@ -416,4 +433,4 @@ terms as Perl itself.
 
 =cut
 
-"1 ± 0";
+"1 Â± 0";

@@ -1,4 +1,4 @@
-use Test::More tests => 17;
+use Test::More tests => 22;
 
 use strict;
 use warnings;
@@ -103,4 +103,35 @@ is(
 	Number::Tolerant->new('string' => 'broken' => 'args'),
 	undef,
 	"three invalid params"
+);
+
+# let's pander to offset's four-parters:
+is(
+	Number::Tolerant->new('string' => 'broken' => 'args' => 'fourway'),
+	undef,
+	"four lousy params"
+);
+
+is(
+	Number::Tolerant->new(10 => 'broken' => 'args' => 'fourway'),
+	undef,
+	"number, then three invalid params"
+);
+
+is(
+	Number::Tolerant->new(10 => 'offset' => 'args' => 'fourway'),
+	undef,
+	"10 offset blah blah",
+);
+
+is(
+	Number::Tolerant->new(10 => 'offset' => 3 => 'fourway'),
+	undef,
+	"10 offset number blah"
+);
+
+is(
+	Number::Tolerant->new(10 => 'offset' => undef => 4),
+	undef,
+	"10 offset undef number"
 );
