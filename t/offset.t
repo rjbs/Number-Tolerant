@@ -64,3 +64,9 @@ is( ($guess <=> 4   ), +1, " ... 4    <=> it is +1");
 is( ($guess <=> 4.75),  0, " ... 4.75 <=> it is  0");
 is( ($guess <=> 5   ), -1, " ... 5    <=> it is -1");
 is( ($guess <=> 6   ), -1, " ... 6    <=> it is -1");
+
+{ # from_string
+  my $tol = Number::Tolerant->from_string("10 (-2 +5)");
+  isa_ok($tol, 'Number::Tolerant');
+  is($tol, "10 (-2 +5)", "offset");
+}

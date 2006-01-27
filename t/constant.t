@@ -1,4 +1,4 @@
-use Test::More tests => 47;
+use Test::More tests => 58;
 
 use strict;
 use warnings;
@@ -6,9 +6,37 @@ use warnings;
 use_ok("Number::Tolerant");
 use_ok("Number::Tolerant::Constant");
 
+{ # constant (with Constant)
+  { # integer
+	  my $tol = Number::Tolerant->from_string("1012");
+    isa_ok($tol, 'Number::Tolerant', "real, blessed constant tolerance");
+    is($tol, "1012", "constant:  1012");
+  }
+  { # rational
+	  my $tol = Number::Tolerant->from_string("10.12");
+    isa_ok($tol, 'Number::Tolerant', "real, blessed constant tolerance");
+    is($tol, "10.12", "constant: 10.12");
+  }
+}
+
 { # test parse
-  my $tol = Number::Tolerant::Type::constant->parse("5");
-  isa_ok($tol, 'Number::Tolerant', "the number 5");
+  { # success!
+    my $tol = Number::Tolerant->from_string("5");
+    isa_ok($tol, 'Number::Tolerant', "the number 5");
+  }
+  { # failures!
+    for ("0=0", '-1-', 'six') {
+      {
+        my $tol = Number::Tolerant->from_string($_);
+        ok(!$tol, "intolerable string!");
+      }
+      {
+        my $tol = tolerance($_);
+        ok(!$tol, "intolerable param!");
+      }
+    }
+    is(tolerance(10,20,30), undef, "bogus tolerance");
+  }
 }
 
 my $guess = Number::Tolerant->new(5);

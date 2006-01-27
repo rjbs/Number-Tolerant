@@ -45,14 +45,14 @@ sub construct { shift;
 };
 
 sub parse { shift;
-  Number::Tolerant::tolerance$_[0] if ($_[0] =~ m!\A($number)\Z!)
+  Number::Tolerant::tolerance$_[0] if ($_[0] =~ m!\A($number)\z!)
 }
 
 sub stringify { $_[0]->{value} }
 
 sub valid_args { shift;
-	return $_[0] if @_==1 and $_[0] =~ $number;
-	return
+	return $_[0] if @_==1 and $_[0] =~ m!\A($number)\z!;
+	return;
 }
 
 Number::Tolerant->_tolerance_type->{'Number::Tolerant::Type::constant'} = 1;

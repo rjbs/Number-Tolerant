@@ -1,4 +1,4 @@
-use Test::More tests => 44;
+use Test::More tests => 46;
 
 use strict;
 use warnings;
@@ -62,3 +62,9 @@ ok(not( $guess > 5.6),    " ... it isn't more than 5.6");
 is( ($guess <=> 4), -1,   " ... 4 <=> it is 0");
 is( ($guess <=> 5), -1,   " ... 5 <=> it is 0");
 is( ($guess <=> 6), -1,   " ... 6 <=> it is 0");
+
+{ # from_string
+	my $tol = Number::Tolerant->from_string("any number");
+  isa_ok($tol, 'Number::Tolerant');
+	is($tol, "any number", "infinite");
+}

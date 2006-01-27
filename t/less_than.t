@@ -1,4 +1,4 @@
-use Test::More tests => 64;
+use Test::More tests => 70;
 
 use strict;
 use warnings;
@@ -86,3 +86,21 @@ ok(     $guess <= 5.6 ,   " ... it is more than or equal to 5.6");
 is( ( $guess <=> 4 ), +1, " ... 4 <=> it is -1");
 is( ( $guess <=> 5 ),  0, " ... 5 <=> it is  0");
 is( ( $guess <=> 6 ), -1, " ... 6 <=> it is +1");
+
+{ # from_string
+  { # prosaic
+    my $tol = Number::Tolerant->from_string("less than 10");
+    isa_ok($tol, 'Number::Tolerant');
+    is($tol, "x < 10", "or_less");
+  }
+  { # algebraic
+	  my $tol = Number::Tolerant->from_string("< 10");
+    isa_ok($tol, 'Number::Tolerant');
+    is($tol, "x < 10", "less_than");
+  }
+  { # reverse algebraic
+	  my $tol = Number::Tolerant->from_string("10 > x");
+    isa_ok($tol, 'Number::Tolerant');
+    is($tol, "x < 10", "less_than");
+  }
+}
