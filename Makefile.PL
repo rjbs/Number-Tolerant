@@ -1,13 +1,23 @@
-use ExtUtils::MakeMaker;
+use strict;
+use warnings;
 
-use 5.008;
-	# require 5.6 for warnings and 'our'
-	# require 5.8 to avoid bizarre segv when 0+ yields undef
+use inc::Module::Install;
+use File::Find;
 
-WriteMakefile(
-	NAME			=> 'Number::Tolerant',
-	VERSION_FROM	=> 'lib/Number/Tolerant.pm',
-	dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-	clean               => { FILES => 'Rubric-*' },
-);
+name          ('Number-Tolerant');
+author        ('Ricardo SIGNES <rjbs@cpan.org>');
+license       ('perl');
+version_from  ('lib/Number/Tolerant.pm');
 
+# require 5.6 for warnings and 'our'
+# require 5.8 to avoid bizarre segv when 0+ yields undef
+perl_version  ('5.008');
+
+my $files = '';
+find( sub { $files .= " $File::Find::name" if -f && /\.t$/ }, "t" );
+
+tests         ($files);
+
+sign(1);
+
+WriteAll();

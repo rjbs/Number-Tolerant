@@ -40,8 +40,8 @@ isa_ok(
 	'Number::Tolerant'
 );
 
-cmp_ok(
-	9, '==', tolerance(8 => through => 10),
+ok(
+	9 == tolerance(8 => through => 10),
 	"'through' tolerance works, trivially"
 );
 
