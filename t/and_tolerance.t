@@ -176,15 +176,11 @@ BEGIN { use_ok("Number::Tolerant"); }
   is($range->{exclude_min},  1, ' ... exclude minimum');
   is($range->{exclude_max},  1, ' ... exclude maximum');
 
-# cmp_ok($range, '==', 31, "31 is inside range");
-      ok($range == 31,     "31 is inside range");
-# cmp_ok($range, '!=', 30, "30 is outside range");
-      ok($range != 30,     "30 is outside range");
+  ok($range == 31,     "31 is inside range");
+  ok($range != 30,     "30 is outside range");
 
-# cmp_ok($range, '==', 39, "39 is inside range");
-      ok($range == 39,     "39 is inside range");
-# cmp_ok($range, '!=', 40, "40 is outside range");
-      ok($range != 40,     "40 is ouside range");
+  ok($range == 39,     "39 is inside range");
+  ok($range != 40,     "40 is ouside range");
 }
 
 { # x_to_y & x_or_less

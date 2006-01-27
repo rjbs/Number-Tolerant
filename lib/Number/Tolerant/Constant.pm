@@ -41,7 +41,7 @@ use base qw(Number::Tolerant);
 no warnings 'redefine';
 
 sub construct { shift;
-	{ value => $_[0], min => $_[0], max => $_[0], constant => 1 }
+  { value => $_[0], min => $_[0], max => $_[0], constant => 1 }
 };
 
 sub parse { shift;
@@ -51,8 +51,8 @@ sub parse { shift;
 sub stringify { $_[0]->{value} }
 
 sub valid_args { shift;
-	return $_[0] if @_==1 and $_[0] =~ m!\A($number)\z!;
-	return;
+  return $_[0] if @_==1 and $_[0] =~ m!\A($number)\z!;
+  return;
 }
 
 Number::Tolerant->_tolerance_type->{'Number::Tolerant::Type::constant'} = 1;
