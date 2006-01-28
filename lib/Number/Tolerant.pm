@@ -141,7 +141,6 @@ sub new {
   my $self;
 
   for my $type (keys %_plugins) {
-    next unless $type->can('valid_args');
     next unless my @args = $type->valid_args(@_);
     my $guts = $type->construct(@args);
 
@@ -181,7 +180,6 @@ sub from_string {
   my ($class, $string) = @_;
   croak "from_string is a class method" if ref $class;
   for my $type (keys %_plugins) {
-    next unless $type->can('parse');
     if (my $tolerance = $type->parse($string)) {
       return $tolerance;
     }
