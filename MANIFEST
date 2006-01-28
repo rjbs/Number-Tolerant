@@ -8,8 +8,18 @@ inc/Module/Install/Metadata.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/Number/Tolerant.pm
-lib/Number/Tolerant/BasicTypes.pm
 lib/Number/Tolerant/Constant.pm
+lib/Number/Tolerant/Type.pm
+lib/Number/Tolerant/Type/constant.pm
+lib/Number/Tolerant/Type/infinite.pm
+lib/Number/Tolerant/Type/less_than.pm
+lib/Number/Tolerant/Type/more_than.pm
+lib/Number/Tolerant/Type/offset.pm
+lib/Number/Tolerant/Type/or_less.pm
+lib/Number/Tolerant/Type/or_more.pm
+lib/Number/Tolerant/Type/plus_or_minus.pm
+lib/Number/Tolerant/Type/plus_or_minus_pct.pm
+lib/Number/Tolerant/Type/to.pm
 lib/Number/Tolerant/Union.pm
 Makefile.PL
 MANIFEST			This list of files
