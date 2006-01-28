@@ -1,5 +1,9 @@
 Revision history for Number::Tolerant
 
+1.50    2006-01-27
+        large refactoring of types; BasicTypes divided, plugin mechanism
+        rewritten
+
 1.44    2006-01-26
         add "offset" type (largely from a patch by Tom Freedman)
         greatly expanded test coverage
