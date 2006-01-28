@@ -6,7 +6,7 @@ use warnings;
 
 =head1 NAME
 
-Number::Tolerant::Union -- unions of tolerance ranges
+Number::Tolerant::Union - unions of tolerance ranges
 
 =head1 VERSION
 

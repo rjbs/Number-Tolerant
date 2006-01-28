@@ -1,16 +1,16 @@
 package Number::Tolerant::Constant;
-our $VERSION = "1.40";
+our $VERSION = "1.50";
 
 use strict;
 use warnings;
 
 =head1 NAME
 
-Number::Tolerant::Constant -- a blessed constant type
+Number::Tolerant::Constant - a blessed constant type
 
 =head1 VERSION
 
-version 1.40
+version 1.50
 
  $Id$
 
@@ -65,8 +65,8 @@ Ricardo SIGNES, E<lt>rjbs@cpan.orgE<gt>
 
 =head1 COPYRIGHT
 
-(C) 2004, Ricardo SIGNES.  Number::Tolerant::Constant is available under the
-same terms as Perl itself.
+(C) 2004-2006, Ricardo SIGNES.  Number::Tolerant::Constant is available under
+the same terms as Perl itself.
 
 =cut
 
