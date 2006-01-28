@@ -1,5 +1,4 @@
 package Number::Tolerant::Constant;
-use base qw(Number::Tolerant);
 our $VERSION = "1.40";
 
 use strict;
@@ -34,11 +33,10 @@ would otherwise complain that the constructor hadn't returned a blessed object.
 
 =cut
 
-my $number = Number::Tolerant->_number_re;
+package Number::Tolerant::Type::constant_obj;
+use base qw(Number::Tolerant::Type);
 
-package Number::Tolerant::Type::constant;
-use base qw(Number::Tolerant);
-no warnings 'redefine';
+my $number = $Number::Tolerant::Type::number;
 
 sub construct { shift;
   { value => $_[0], min => $_[0], max => $_[0], constant => 1 }
@@ -55,7 +53,9 @@ sub valid_args { shift;
   return;
 }
 
-Number::Tolerant->_tolerance_type->{'Number::Tolerant::Type::constant'} = 1;
+#Number::Tolerant->_tolerance_type->{'Number::Tolerant::Type::constant'} = 1;
+Number::Tolerant->disable_plugin("Number::Tolerant::Type::constant");
+Number::Tolerant->enable_plugin( "Number::Tolerant::Type::constant_obj");
 
 =head1 TODO
 

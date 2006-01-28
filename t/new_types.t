@@ -1,15 +1,18 @@
-use Test::More tests => 5;
+use Test::More tests => 4;
 
 use strict;
 use warnings;
 
-BEGIN { use_ok("Number::Tolerant"); }
+BEGIN {
+  use_ok("Number::Tolerant");
+  use_ok("Number::Tolerant::Type");
+}
 
-my $number = Number::Tolerant->_number_re;
+{
+  package Number::Tolerant::Type::through;
+	use base qw(Number::Tolerant::Type);
 
-package Number::Tolerant::Type::through;
-	use base qw(Number::Tolerant);
-	Number::Tolerant->_tolerance_type->{'Number::Tolerant::Type::through'} = 1;
+  my $number = $Number::Tolerant::Type::number;
 
 	sub construct { shift;
 		($_[0],$_[1]) = sort { $a <=> $b } ($_[0],$_[1]);
@@ -33,7 +36,9 @@ package Number::Tolerant::Type::through;
 			and ($_[0] =~ $number) and ($_[1] eq 'through') and ($_[2] =~ $number);
 		return;
 	}
-package main;
+
+  Number::Tolerant->enable_plugin("Number::Tolerant::Type::through");
+}
 
 isa_ok(
 	tolerance(8 => through => 10),
@@ -43,18 +48,4 @@ isa_ok(
 ok(
 	9 == tolerance(8 => through => 10),
 	"'through' tolerance works, trivially"
-);
-
-Number::Tolerant->_tolerance_type->{stddev} = {};
-
-is(
-	tolerance(8 => not_here => 10),
-	undef,
-	"not_here not found, even with bad type entry"
-);
-
-is(
-	Number::Tolerant->from_string("10 or so"),
-	undef,
-	"not_here not found, even with bad type entry"
 );

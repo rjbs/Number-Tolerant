@@ -11,7 +11,7 @@ use Carp;
 
 =head1 NAME
 
-Number::Tolerant -- tolerance ranges for inexact numbers
+Number::Tolerant - tolerance ranges for inexact numbers
 
 =head1 VERSION
 
@@ -93,13 +93,45 @@ The first will sort as numerically less than the second.
 
 =cut
 
-my $number = qr/(?:[+-]?)(?=\d|\.\d)\d*(?:\.\d*)?(?:[Ee](?:[+-]?\d+))?/;
-sub _number_re { $number }
+# these are the default plugins
+my %_plugins;
 
-my %tolerance_type = ();
+sub disable_plugin {
+  my ($class, $plugin) = @_;
+  delete $_plugins{ $plugin };
+  return;
+}
 
-sub _tolerance_type { \%tolerance_type }
-require Number::Tolerant::BasicTypes;
+sub enable_plugin {
+  my ($class, $plugin) = @_;
+
+  # XXX: there has to be a better test to use here -- rjbs, 2006-01-27
+  unless (eval { $plugin->can('construct') }) {
+    eval "require $plugin" or die $@;
+  }
+
+  unless (eval { $class->validate_plugin($plugin); }) {
+    Carp::croak "class $class is not a valid Number::Tolerant plugin: $@";
+  }
+
+  $_plugins{ $plugin } = undef;
+  return;
+}
+
+sub validate_plugin {
+  my ($class, $plugin) = @_;
+  for (qw(parse valid_args construct)) {
+    die "can't $_" unless $plugin->can($_);
+  }
+  return 1;
+}
+
+__PACKAGE__->enable_plugin("Number::Tolerant::Type::$_") for 
+  qw( constant    infinite        less_than
+      more_than   offset          or_less 
+      or_more     plus_or_minus   plus_or_minus_pct
+      to
+    );
 
 sub tolerance { __PACKAGE__->new(@_); }
 
@@ -108,7 +140,7 @@ sub new {
   return unless @_;
   my $self;
 
-  for my $type (keys %tolerance_type) {
+  for my $type (keys %_plugins) {
     next unless $type->can('valid_args');
     next unless my @args = $type->valid_args(@_);
     my $guts = $type->construct(@args);
@@ -148,7 +180,7 @@ the future.  (I just don't need it yet.)
 sub from_string {
   my ($class, $string) = @_;
   croak "from_string is a class method" if ref $class;
-  for my $type (keys %tolerance_type) {
+  for my $type (keys %_plugins) {
     next unless $type->can('parse');
     if (my $tolerance = $type->parse($string)) {
       return $tolerance;
@@ -285,6 +317,8 @@ like "m < x < n"
  or_less   - "x <= n"
  more_than - "m < x"
  less_than - "x < n"
+ offset    - "x (-y1 +y2)"
+ constant  - "x"
  plus_or_minus     - "x +/- y"
  plus_or_minus_pct - "x +/- y%"
 
@@ -346,33 +380,40 @@ use overload
 
 =back
 
-=head2 EXTENDING
+=head1 EXTENDING
 
-This feature is slighly experimental, but it's here.  Custom tolerance types
-can be created by adding entries to the hash returned by the C<_tolerance_type>
-method.  Keys are package names, and values are ignored.  (This registration
-interface is all but sure to be rewritten in the near future.)
+This feature is slighly experimental, but it's here.
 
-The packages should contain classes that subclass Number::Tolerant, providing
-at least these methods:
+New tolerance types may be written as subclasses of L<Number::Tolerant::Type>,
+providing the interface described in its documentation.  They can then be
+enabled or disabled with the following methods:
 
- construct  - returns the reference to be blessed into the tolerance object
- parse      - used by from_string; returns the object that represents the string
-              or undef, if the string doesn't represent this kind of tolerance
- valid_args - passed args from ->new() or tolerance(); if they indicate this 
-              type of tolerance, this sub returns args to be passed to
-              construct
+=head2 C< enable_plugin >
 
-The Number::Tolerant constructor looks through the list of packages for one
-whose C<valid_args> likes the arguments passed to the constructor.  That
-package's C<construct> is used to build the guts of the object.  (This is a
-simplification; some other logic is applied, including passing literal numbers
-through unblessed by default.)
+  Number::Tolerant->enable_plugin($class_name);
+
+This method enables the named class, so that attempts to create new tolerances
+will check against this class.  Classes are checked against
+C<L</validate_plugin>> before being enabled.  An exception is thrown if the
+class does not appear to provide the Number::Tolerant::Type interface.
+
+=head2 C< disable_plugin >
+
+  Number::Tolerant->disable_plugin($class_name);
+
+This method will disable the named class, so that future attempts to create new
+tolerances will not check against this class.
+
+=head2 C< validate_plugin >
+
+  Number::Tolerant->validate_plugin($class_name);
+
+This method checks (naively) that the given class provides the interface
+defined in Number::Tolerant::Type.  If it does not, an exception is thrown.
 
 =head1 TODO
 
 =over 4
-
 
 =item * Extend C<from_string> to cover unions.
 
@@ -384,15 +425,7 @@ through unblessed by default.)
  $range->convert_to('plus_minus');
  $range->stringify_as('plus_minus_pct');
 
-C<stringify_as> can be faked, for a few tolerance types, with something like
-this:
-
- Number::Tolerance->_tolerance_type->{'destination_type'}->stringify($range);
-
-Besides being ugly, it's a side-effect that isn't tested or guaranteed to work
-very often.
-
-=item * Break the basic types into their own modules and use L<Module::Pluggable>.
+=item * Create a factory so that you can simultaneously work with two sets of plugins.
 
 =back
 
@@ -421,6 +454,9 @@ Is equivalent to the C<Number::Tolerant> code:
 
 Thanks to Yuval Kogman and #perl-qa for helping find the bizarre bug that drove
 the minimum required perl up to 5.8
+
+Thanks to Tom Freedman, who reminded me that this code was fun to work on, and
+also provided the initial implementation for the offset type.
 
 =head1 AUTHOR
 
