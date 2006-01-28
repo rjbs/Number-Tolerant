@@ -29,6 +29,7 @@ t/00-load.t
 t/and_constant.t
 t/and_tolerance.t
 t/bad_method.t
+t/bad_plugin.t
 t/constant.t
 t/from_string.t
 t/infinite.t
