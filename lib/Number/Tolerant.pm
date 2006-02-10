@@ -4,7 +4,7 @@ use base qw(Exporter);
 use strict;
 use warnings;
 
-our $VERSION = "1.50";
+our $VERSION = "1.52";
 our @EXPORT = qw(tolerance);
 
 use Carp;
@@ -15,7 +15,7 @@ Number::Tolerant - tolerance ranges for inexact numbers
 
 =head1 VERSION
 
-version 1.50
+version 1.52
 
  $Id$
 

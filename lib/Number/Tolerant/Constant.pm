@@ -1,5 +1,5 @@
 package Number::Tolerant::Constant;
-our $VERSION = "1.50";
+our $VERSION = "1.52";
 
 use strict;
 use warnings;

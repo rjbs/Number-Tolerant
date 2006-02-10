@@ -4,7 +4,7 @@ use base qw(Number::Tolerant);
 use strict;
 use warnings;
 
-our $VERSION = "1.50";
+our $VERSION = "1.52";
 
 =head1 NAME
 
@@ -12,7 +12,7 @@ Number::Tolerant::Type - a type of tolerance
 
 =head1 VERSION
 
-version 1.50
+version 1.52
 
  $Id$
 

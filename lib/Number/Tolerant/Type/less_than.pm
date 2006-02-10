@@ -4,6 +4,8 @@ use base qw(Number::Tolerant::Type);
 use strict;
 use warnings;
 
+our $VERSION = '1.52';
+
 my $number = $Number::Tolerant::Type::number;
 my $X      = $Number::Tolerant::Type::X;
 
