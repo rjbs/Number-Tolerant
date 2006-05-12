@@ -53,9 +53,17 @@ sub valid_args { shift;
   return;
 }
 
-#Number::Tolerant->_tolerance_type->{'Number::Tolerant::Type::constant'} = 1;
-Number::Tolerant->disable_plugin("Number::Tolerant::Type::constant");
-Number::Tolerant->enable_plugin( "Number::Tolerant::Type::constant_obj");
+package Number::Tolerant::Constant;
+
+sub import {
+  Number::Tolerant->disable_plugin("Number::Tolerant::Type::constant");
+  Number::Tolerant->enable_plugin( "Number::Tolerant::Type::constant_obj");
+}
+
+sub _disable {
+  Number::Tolerant->disable_plugin("Number::Tolerant::Type::constant_obj");
+  Number::Tolerant->enable_plugin( "Number::Tolerant::Type::constant");
+}
 
 =head1 TODO
 

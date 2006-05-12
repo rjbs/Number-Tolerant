@@ -45,13 +45,15 @@ specified tolerances.
 
 =head2 Instantiation
 
-=head3 C<< Number::Tolerance->new( ... ) >>
+=head3 new
 
-=head3 C<< tolerance( ... ) >>
+=head3 tolerance
 
 There is a C<new> method on the Number::Tolerant class, but it also exports a
 simple function, C<tolerance>, which will return an object of the
 Number::Tolerant class.  Both use the same syntax:
+
+ my $range = Number::Tolerant->new( $x => $method => $y);
 
  my $range = tolerance( $x => $method => $y);
 
@@ -162,7 +164,7 @@ sub new {
   bless $self => $self->{method};
 }
 
-=head3 C<< from_string($stringification) >>
+=head3 from_string
 
 A new tolerance can be instantiated from the stringification of an old
 tolerance.  For example:
@@ -201,7 +203,9 @@ sub stringify {
   return $string;
 }
 
-=head2 C<< stringify_as($type) >>
+=head2 stringify_as
+
+  my $string = $tolerance->stringify_as($type);
 
 This method does nothing!  Someday, it will stringify the given tolerance as a
 different type, if possible.  "10 +/- 1" will
@@ -211,7 +215,9 @@ C<stringify_as('plus_or_minus_pct')> to "10 +/- 10%" for example.
 
 sub stringify_as { }
 
-=head2 C<< numify >>
+=head2 numify
+
+  my $n = $tolerance->numify;
 
 This returns the numeric form of a tolerance.  If a tolerance has both a
 minimum and a maximum, and they are the same, then that is the numification.
@@ -419,8 +425,8 @@ defined in Number::Tolerant::Type.  If it does not, an exception is thrown.
 
 =item * Allow translation into forms not originally used:
 
- $range = tolerance(9 => to => 17); 
- $range->convert_to('plus_minus');
+ my $range    = tolerance(9 => to => 17); 
+ my $range_pm = $range->convert_to('plus_minus');
  $range->stringify_as('plus_minus_pct');
 
 =item * Create a factory so that you can simultaneously work with two sets of plugins.

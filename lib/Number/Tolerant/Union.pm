@@ -39,7 +39,9 @@ tolerance will function on a union of tolerances, as listed below.
 
 =head1 METHODS
 
-=head2 C<< Number::Tolerant::Union->new( @options ) >>
+=head2 new
+
+  my $union = Number::Tolerant::Union->new(@list_of_tolerances);
 
 There is a C<new> method on the Number::Tolerant::Union class, but unions are
 meant to be created with the C<|> operator on a Number::Tolerant tolerance.

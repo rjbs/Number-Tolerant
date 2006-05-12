@@ -1,5 +1,9 @@
 Revision history for Number::Tolerant
 
+1.52    2006-05-11
+        no functional changes
+        documentation tweaks, individual module versions updated
+
 1.50    2006-01-27
         large refactoring of types
         BasicTypes divided, plugin mechanism rewritten
