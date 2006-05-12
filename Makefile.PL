@@ -18,6 +18,6 @@ find( sub { $files .= " $File::Find::name" if -f && /\.t$/ }, "t" );
 
 tests         ($files);
 
-sign(1);
+# sign(1); # apparently this causes some people grief -- rjbs, 2006-05-11
 
 WriteAll();
