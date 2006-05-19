@@ -1,5 +1,8 @@
 Revision history for Number::Tolerant
 
+1.540   2006-05-18
+        allow more variety in spaces inside parsed tolerance strings
+
 1.52    2006-05-11
         no functional changes
         documentation tweaks, individual module versions updated
