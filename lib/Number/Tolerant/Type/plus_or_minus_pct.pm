@@ -4,7 +4,7 @@ use base qw(Number::Tolerant::Type);
 use strict;
 use warnings;
 
-our $VERSION = '1.52';
+our $VERSION = '1.540';
 
 my $number = $Number::Tolerant::Type::number;
 my $X = $Number::Tolerant::Type::X;
@@ -19,8 +19,9 @@ sub construct { shift;
 }
 
 sub parse { shift;
-  Number::Tolerant::tolerance("$1", 'plus_or_minus_pct', "$2")
-    if ($_[0] =~ m!\A($number) \+/- ($number)%\z!) 
+  return Number::Tolerant::tolerance("$1", 'plus_or_minus_pct', "$2")
+    if ($_[0] =~ m!\A($number)\s*\+/-\s*($number)%\z!);
+  return;
 }
 
 sub stringify { "$_[0]->{value} +/- $_[0]->{variance}%" }

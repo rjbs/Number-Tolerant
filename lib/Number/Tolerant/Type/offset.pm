@@ -4,7 +4,7 @@ use base qw(Number::Tolerant::Type);
 use strict;
 use warnings;
 
-our $VERSION = '1.52';
+our $VERSION = '1.540';
 
 my $number = $Number::Tolerant::Type::number;
 my $X = $Number::Tolerant::Type::X;
@@ -20,9 +20,10 @@ sub construct { shift;
 sub parse {
   my (undef, $string) = @_;
 
-  if ($string =~ m!\A($number)\s+\(?\s*($number)\s+($number)\s*\)?\s*\z!) {
-    Number::Tolerant::tolerance("$1", 'offset', "$2", "$3")
-  }
+  return Number::Tolerant::tolerance("$1", 'offset', "$2", "$3")
+    if ($string =~ m!\A($number)\s+\(?\s*($number)\s+($number)\s*\)?\s*\z!);
+
+  return;
 }
 
 sub stringify {

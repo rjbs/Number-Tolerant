@@ -4,7 +4,7 @@ use base qw(Number::Tolerant::Type);
 use strict;
 use warnings;
 
-our $VERSION = '1.52';
+our $VERSION = '1.540';
 
 my $number = $Number::Tolerant::Type::number;
 my $X = $Number::Tolerant::Type::X;
@@ -12,8 +12,9 @@ my $X = $Number::Tolerant::Type::X;
 sub construct { shift; { value => 0 } }
 
 sub parse { shift;
-  Number::Tolerant::tolerance('infinite')
-    if ($_[0] =~ m!\Aany number\z!)
+  return Number::Tolerant::tolerance('infinite')
+    if ($_[0] =~ m!\Aany\s+number\z!);
+  return;
 }
 
 sub valid_args { shift;

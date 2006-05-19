@@ -13,11 +13,6 @@ version_from  ('lib/Number/Tolerant.pm');
 # require 5.8 to avoid bizarre segv when 0+ yields undef
 perl_version  ('5.008');
 
-my $files = '';
-find( sub { $files .= " $File::Find::name" if -f && /\.t$/ }, "t" );
-
-tests         ($files);
-
 # sign(1); # apparently this causes some people grief -- rjbs, 2006-05-11
 
 WriteAll();

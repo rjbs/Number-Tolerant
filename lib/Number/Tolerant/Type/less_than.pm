@@ -4,7 +4,7 @@ use base qw(Number::Tolerant::Type);
 use strict;
 use warnings;
 
-our $VERSION = '1.52';
+our $VERSION = '1.540';
 
 my $number = $Number::Tolerant::Type::number;
 my $X      = $Number::Tolerant::Type::X;
@@ -17,7 +17,8 @@ sub parse { shift;
   return Number::Tolerant::tolerance(less_than => "$1")
     if ($_[0] =~ m!\A($number)\s*>$X\z!);
   return Number::Tolerant::tolerance(less_than => "$1")
-    if ($_[0] =~ m!\Aless than ($number)\z!);
+    if ($_[0] =~ m!\Aless\s+than\s+($number)\z!);
+  return;
 }
 
 sub valid_args { shift;
