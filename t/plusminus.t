@@ -1,4 +1,4 @@
-use Test::More tests => 46;
+use Test::More tests => 48;
 
 use strict;
 use warnings;
@@ -65,6 +65,12 @@ is( ($guess <=> 6), -1,   " ... 6 <=> it is +1");
 
 { # from_string
 	my $tol = Number::Tolerant->from_string("10 +/- 2");
+  isa_ok($tol, 'Number::Tolerant');
+	is($tol, "10 +/- 2", "plus_or_minus");
+}
+
+{ # from_string
+	my $tol = Number::Tolerant->from_string("10+/-2");
   isa_ok($tol, 'Number::Tolerant');
 	is($tol, "10 +/- 2", "plus_or_minus");
 }
