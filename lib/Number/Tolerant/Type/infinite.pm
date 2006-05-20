@@ -4,10 +4,7 @@ use base qw(Number::Tolerant::Type);
 use strict;
 use warnings;
 
-our $VERSION = '1.540';
-
-my $number = $Number::Tolerant::Type::number;
-my $X = $Number::Tolerant::Type::X;
+our $VERSION = '1.550';
 
 sub construct { shift; { value => 0 } }
 

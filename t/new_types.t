@@ -12,8 +12,6 @@ BEGIN {
   package Number::Tolerant::Type::through;
 	use base qw(Number::Tolerant::Type);
 
-  my $number = $Number::Tolerant::Type::number;
-
 	sub construct { shift;
 		($_[0],$_[1]) = sort { $a <=> $b } ($_[0],$_[1]);
 		{
@@ -24,13 +22,19 @@ BEGIN {
 		}
 	}
 
-	sub parse { shift;
+	sub parse {
+    my $self = shift;
+    my $number = $self->number_re;
+
 		tolerance("$1", 'through', "$2") if ($_[0] =~ m!\A($number) to ($number)\Z!)
 	}
 
 	sub stringify { "$_[0]->{min} through $_[0]->{max}" }
 
-	sub valid_args { shift;
+	sub valid_args {
+    my $self = shift;
+    my $number = $self->number_re;
+
 		return ($_[0],$_[2])
 			if ((grep { defined } @_) == 3)
 			and ($_[0] =~ $number) and ($_[1] eq 'through') and ($_[2] =~ $number);

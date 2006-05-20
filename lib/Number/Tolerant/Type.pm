@@ -4,7 +4,7 @@ use base qw(Number::Tolerant);
 use strict;
 use warnings;
 
-our $VERSION = "1.540";
+our $VERSION = "1.550";
 
 =head1 NAME
 
@@ -12,19 +12,13 @@ Number::Tolerant::Type - a type of tolerance
 
 =head1 VERSION
 
-version 1.540
+version 1.550
 
  $Id$
 
 =head1 SYNOPSIS
 
 =cut
-
-# a number!
-our $number = qr/(?:[+-]?)(?=\d|\.\d)\d*(?:\.\d*)?(?:[Ee](?:[+-]?\d+))?/;
-
-# a variable name!
-our $X      = qr/(?:\s*x\s*)/;
 
 =head1 METHODS
 
@@ -49,6 +43,37 @@ return a hashref that will become the guts of a new tolerance.
 
 This method returns a new, fully constructed tolerance from the given string
 if the given string can be parsed into a tolerance of this type.
+
+=head2 number_re
+
+  my $number_re = $type_class->number_re;
+
+This method returns the regular expression (as a C<qx> construct) used to match
+number in parsed strings.
+
+=cut
+
+my $number;
+BEGIN { $number = qr/(?:[+-]?)(?=\d|\.\d)\d*(?:\.\d*)?(?:[Ee](?:[+-]?\d+))?/; }
+
+sub number_re { return $number; }
+
+=head2 variable_re
+
+  my $variable_re = $type_class->variable_re;
+
+This method returns the regular expression (as a C<qx> construct) used to match
+the variable in parsed strings.
+
+When parsing "4 <= x <= 10" this regular expression is used to match the letter
+"x."
+
+=cut
+
+my $X;
+BEGIN { $X =  qr/(?:\s*x\s*)/; }
+
+sub variable_re { return $X; }
 
 =head1 SEE ALSO
 
