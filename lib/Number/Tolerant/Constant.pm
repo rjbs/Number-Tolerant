@@ -41,9 +41,9 @@ sub construct { shift;
 };
 
 sub parse {
-  my $self = shift;
+  my ($self, $string, $factory) = @_;
   my $number = $self->number_re;
-  return Number::Tolerant::tolerance$_[0] if ($_[0] =~ m!\A($number)\z!);
+  return $factory->new($string) if ($string =~ m!\A($number)\z!);
   return;
 }
 

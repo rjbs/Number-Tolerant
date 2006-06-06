@@ -15,11 +15,11 @@ sub construct { shift;
 }
 
 sub parse {
-  my ($self, $string) = @_;
+  my ($self, $string, $factory) = @_;
 
   my $number = $self->number_re;
-  return Number::Tolerant::tolerance("$1", 'offset', "$2", "$3")
-    if ($string =~ m!\A($number)\s+\(?\s*($number)\s+($number)\s*\)?\s*\z!);
+  return $factory->new("$1", 'offset', "$2", "$3")
+    if $string =~ m!\A($number)\s+\(?\s*($number)\s+($number)\s*\)?\s*\z!;
 
   return;
 }

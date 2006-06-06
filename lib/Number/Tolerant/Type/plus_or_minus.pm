@@ -16,11 +16,12 @@ sub construct { shift;
 }
 
 sub parse {
-  my $self = shift;
+  my ($self, $string, $factory) = @_;
+
   my $number = $self->number_re;
 
-  return Number::Tolerant::tolerance("$1", 'plus_or_minus', "$2")
-    if ($_[0] =~ m!\A($number)\s*\+/-\s*($number)\z!);
+  return $factory->new("$1", 'plus_or_minus', "$2")
+    if $string =~ m!\A($number)\s*\+/-\s*($number)\z!;
   return;
 }
 

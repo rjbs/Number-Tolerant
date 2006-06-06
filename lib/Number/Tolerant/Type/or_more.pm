@@ -9,16 +9,15 @@ our $VERSION = '1.550';
 sub construct { shift; { value => $_[0], min => $_[0] } }
 
 sub parse { 
-  my $self = shift;
+  my ($self, $string, $factory) = @_;
   my $number = $self->number_re;
   my $X = $self->variable_re;
 
-  return Number::Tolerant::tolerance("$1", 'or_more')
-    if ($_[0] =~ m!\A($number)\s*<=$X\z!);
-  return Number::Tolerant::tolerance("$1", 'or_more')
-    if ($_[0] =~ m!\A$X?>=\s*($number)\z!);
-  return Number::Tolerant::tolerance("$1", 'or_more')
-    if ($_[0] =~ m!\A($number)\s+or\s+more\z!);
+  return $factory->new("$1", 'or_more') if $string =~ m!\A($number)\s*<=$X\z!;
+  return $factory->new("$1", 'or_more') if $string =~ m!\A$X?>=\s*($number)\z!;
+  return $factory->new("$1", 'or_more')
+    if $string =~ m!\A($number)\s+or\s+more\z!;
+
   return;
 }
 

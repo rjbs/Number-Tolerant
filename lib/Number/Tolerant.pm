@@ -190,7 +190,7 @@ sub from_string {
   my ($class, $string) = @_;
   croak "from_string is a class method" if ref $class;
   for my $type (keys %_plugins) {
-    if (defined(my $tolerance = $type->parse($string))) {
+    if (defined(my $tolerance = $type->parse($string, $class))) {
       return $tolerance;
     }
   }
@@ -438,6 +438,12 @@ defined in Number::Tolerant::Type.  If it does not, an exception is thrown.
  $range->stringify_as('plus_minus_pct');
 
 =item * Create a factory so that you can simultaneously work with two sets of plugins.
+
+This one is very near completion.  There will now be two classes that should be
+used:  Number::Tolerant::Factory, which produces tolerances, and
+Number::Tolerant::Tolerance, which is a tolerance.  Both will inherit from
+N::T, for supporting old code, and N::T will dispatch construction methods to a
+default factory.
 
 =back
 

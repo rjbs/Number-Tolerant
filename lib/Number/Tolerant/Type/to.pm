@@ -17,16 +17,16 @@ sub construct { shift;
 }
 
 sub parse {
-  my $self = shift;
+  my ($self, $string, $factory) = @_;
   my $number = $self->number_re;
   my $X = $self->variable_re;
 
-  return Number::Tolerant::tolerance("$1", 'to', "$2")
-    if ($_[0] =~ m!\A($number)\s*<=$X<=\s*($number)\z!);
-  return Number::Tolerant::tolerance("$2", 'to', "$1")
-    if ($_[0] =~ m!\A($number)\s*>=$X>=\s*($number)\z!);
-  return Number::Tolerant::tolerance("$1", 'to', "$2")
-    if ($_[0] =~ m!\A($number)\s+to\s+($number)\z!);
+  return $factory->new("$1", 'to', "$2")
+    if ($string =~ m!\A($number)\s*<=$X<=\s*($number)\z!);
+  return $factory->new("$2", 'to', "$1")
+    if ($string =~ m!\A($number)\s*>=$X>=\s*($number)\z!);
+  return $factory->new("$1", 'to', "$2")
+    if ($string =~ m!\A($number)\s+to\s+($number)\z!);
   return;
 }
 

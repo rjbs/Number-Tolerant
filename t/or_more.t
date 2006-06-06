@@ -1,16 +1,9 @@
-use Test::More tests => 72;
+use Test::More tests => 69;
 
 use strict;
 use warnings;
 
 BEGIN { use_ok("Number::Tolerant"); }
-
-{ # test parse
-  for (">= 5", "x >= 5", "5 <= x") {
-    my $tol = Number::Tolerant::Type::or_more->parse($_);
-    isa_ok($tol, 'Number::Tolerant', $_);
-  }
-}
 
 my $guess = Number::Tolerant->new(5 => 'or_more');
 
