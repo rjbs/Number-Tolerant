@@ -98,6 +98,10 @@ The first will sort as numerically less than the second.
 # these are the default plugins
 my %_plugins;
 
+sub _plugins {
+  keys %_plugins
+}
+
 sub disable_plugin {
   my ($class, $plugin) = @_;
   delete $_plugins{ $plugin };
@@ -128,12 +132,16 @@ sub validate_plugin {
   return 1;
 }
 
-__PACKAGE__->enable_plugin("Number::Tolerant::Type::$_") for 
-  qw( constant    infinite        less_than
-      more_than   offset          or_less 
-      or_more     plus_or_minus   plus_or_minus_pct
-      to
-    );
+my @_default_plugins = 
+  map { "Number::Tolerant::Type::$_" }
+  qw(
+    constant    infinite        less_than
+    more_than   offset          or_less 
+    or_more     plus_or_minus   plus_or_minus_pct
+    to
+  );
+
+__PACKAGE__->enable_plugin($_) for @_default_plugins;
 
 sub tolerance { __PACKAGE__->new(@_); }
 
@@ -142,7 +150,7 @@ sub new {
   return unless @_;
   my $self;
 
-  for my $type (keys %_plugins) {
+  for my $type ($class->_plugins) {
     next unless my @args = $type->valid_args(@_);
     my $guts = $type->construct(@args);
 
