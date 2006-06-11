@@ -1,5 +1,8 @@
 Revision history for Number::Tolerant
 
+1.555   2006-06-11
+        use Sub::Exporter to export
+
 1.540   2006-05-18
         allow more variety in spaces inside parsed tolerance strings
 

@@ -4,10 +4,15 @@ use base qw(Exporter);
 use strict;
 use warnings;
 
-our $VERSION = "1.550";
-our @EXPORT = qw(tolerance);
+our $VERSION = "1.555";
 
-use Carp;
+use Sub::Exporter::Util;
+use Sub::Exporter -setup => {
+  exports => { tolerance => Sub::Exporter::Util::curry_class('new'), },
+  groups  => { default   => [ qw(tolerance) ] },
+};
+
+use Carp ();
 
 =head1 NAME
 
@@ -143,8 +148,6 @@ my @_default_plugins =
 
 __PACKAGE__->enable_plugin($_) for @_default_plugins;
 
-sub tolerance { __PACKAGE__->new(@_); }
-
 sub new {
   my $class = shift;
   return unless @_;
@@ -188,7 +191,7 @@ the future.  (I just don't need it yet.)
 
 sub from_string {
   my ($class, $string) = @_;
-  croak "from_string is a class method" if ref $class;
+  Carp::croak "from_string is a class method" if ref $class;
   for my $type (keys %_plugins) {
     if (defined(my $tolerance = $type->parse($string, $class))) {
       return $tolerance;
@@ -291,10 +294,10 @@ sub _intersection {
     if ($_[0]{max} and $max == $_[0]{max} and $_[0]{exclude_max})
     or ($_[1]{max} and $max == $_[1]{max} and $_[1]{exclude_max});
 
-  return tolerance('infinite') unless defined $min || defined $max;
-  return tolerance($min => ($exclude_min ? 'more_than' : 'or_more'))
+  return $_[0]->new('infinite') unless defined $min || defined $max;
+  return $_[0]->new($min => ($exclude_min ? 'more_than' : 'or_more'))
     unless defined $max;
-  return tolerance($max => ($exclude_max ? 'less_than' : 'or_less'))
+  return $_[0]->new($max => ($exclude_max ? 'less_than' : 'or_less'))
     unless defined $min;
   bless {
     max => $max,

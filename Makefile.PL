@@ -13,6 +13,8 @@ version_from  ('lib/Number/Tolerant.pm');
 # require 5.8 to avoid bizarre segv when 0+ yields undef
 perl_version  ('5.008');
 
+requires      ('Sub::Exporter' => 0.950);
+
 # sign(1); # apparently this causes some people grief -- rjbs, 2006-05-11
 
 WriteAll();
