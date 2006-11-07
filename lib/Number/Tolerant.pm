@@ -118,7 +118,6 @@ sub enable_plugin {
 
   # XXX: there has to be a better test to use here -- rjbs, 2006-01-27
   unless (eval { $plugin->can('construct') }) {
-    ## no critic (StringyEval)
     eval "require $plugin" or die $@;
   }
 
