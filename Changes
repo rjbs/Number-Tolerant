@@ -1,5 +1,8 @@
 Revision history for Number::Tolerant
 
+1.556   2006-06-11
+        perl critic, and other minor format/packaging changes
+
 1.555   2006-06-11
         use Sub::Exporter to export
 

@@ -1,8 +1,8 @@
-package Number::Tolerant::Constant;
-our $VERSION = "1.550";
-
 use strict;
 use warnings;
+
+package Number::Tolerant::Constant;
+our $VERSION = "1.550";
 
 =head1 NAME
 

@@ -1,8 +1,8 @@
-package Number::Tolerant::Union;
-our $VERSION = "1.42";
-
 use strict;
 use warnings;
+
+package Number::Tolerant::Union;
+our $VERSION = "1.42";
 
 =head1 NAME
 

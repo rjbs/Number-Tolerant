@@ -1,8 +1,8 @@
-package Number::Tolerant::Type::or_more;
-use base qw(Number::Tolerant::Type);
-
 use strict;
 use warnings;
+
+package Number::Tolerant::Type::or_more;
+use base qw(Number::Tolerant::Type);
 
 our $VERSION = '1.550';
 

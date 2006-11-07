@@ -1,10 +1,10 @@
-package Number::Tolerant;
-use base qw(Exporter);
-
 use strict;
 use warnings;
 
-our $VERSION = "1.555";
+package Number::Tolerant;
+use base qw(Exporter);
+
+our $VERSION = "1.556";
 
 use Sub::Exporter::Util;
 use Sub::Exporter -setup => {
@@ -118,6 +118,7 @@ sub enable_plugin {
 
   # XXX: there has to be a better test to use here -- rjbs, 2006-01-27
   unless (eval { $plugin->can('construct') }) {
+    ## no critic (StringyEval)
     eval "require $plugin" or die $@;
   }
 
@@ -240,6 +241,7 @@ sub numify {
   # if a tolerance has equal min and max, it numifies to that number
   return $_[0]{min}
     if $_[0]{min} and $_[0]{max} and $_[0]{min} == $_[0]{max};
+  ## no critic (ReturnUndef)
   return undef;
 }
 
