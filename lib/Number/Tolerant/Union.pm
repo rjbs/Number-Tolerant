@@ -130,7 +130,7 @@ use overload
 		},
 	'|' => sub { __PACKAGE__->new($_[0]->options,$_[1]); },
 	'&' => sub {
-		UNIVERSAL::isa($_[1],'Number::Tolerant')
+		eval { $_[1]->isa($_[1],'Number::Tolerant') }
 			? __PACKAGE__->new(map { $_ & $_[1] } $_[0]->options )
 			: $_[1] == $_[0]
 				? $_[1]

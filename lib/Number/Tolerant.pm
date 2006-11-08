@@ -205,11 +205,11 @@ sub stringify {
   return 'any number' unless $self->{min} || $self->{max};
   my $string = '';
   if ($self->{min}) {
-    $string .= "$self->{min} <" . ($self->{exclude_min} ? '' : '=') . ' ';
+    $string .= "$self->{min} <" . ($self->{exclude_min} ? q{} : '=') . q{ };
   }
   $string .= 'x';
   if ($self->{max}) {
-    $string .= ' <' . ($self->{exclude_max} ? '' : '=') .  " $self->{max}";
+    $string .= ' <' . ($self->{exclude_max} ? q{} : '=') .  " $self->{max}";
   }
   return $string;
 }
