@@ -53,3 +53,4 @@ t/x_to_x.t
 t/x_to_y.t
 t/y_to_x.t
 t/perl-critic.t
+LICENSE
