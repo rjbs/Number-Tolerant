@@ -4,7 +4,7 @@ use warnings;
 package Number::Tolerant;
 use base qw(Exporter);
 
-our $VERSION = "1.556";
+our $VERSION = "1.600";
 
 use Sub::Exporter::Util;
 use Sub::Exporter -setup => {
@@ -20,7 +20,7 @@ Number::Tolerant - tolerance ranges for inexact numbers
 
 =head1 VERSION
 
-version 1.550
+version 1.600
 
 =head1 SYNOPSIS
 

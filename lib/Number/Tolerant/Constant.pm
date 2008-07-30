@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package Number::Tolerant::Constant;
-our $VERSION = "1.550";
+our $VERSION = "1.600";
 
 =head1 NAME
 
@@ -10,7 +10,7 @@ Number::Tolerant::Constant - a blessed constant type
 
 =head1 VERSION
 
-version 1.550
+version 1.600
 
 =head1 SYNOPSIS
 

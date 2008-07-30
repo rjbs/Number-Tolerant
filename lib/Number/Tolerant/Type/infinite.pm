@@ -4,7 +4,7 @@ use warnings;
 package Number::Tolerant::Type::infinite;
 use base qw(Number::Tolerant::Type);
 
-our $VERSION = '1.550';
+our $VERSION = '1.600';
 
 sub construct { shift; { value => 0 } }
 

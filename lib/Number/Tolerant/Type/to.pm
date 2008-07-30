@@ -4,7 +4,7 @@ use warnings;
 package Number::Tolerant::Type::to;
 use base qw(Number::Tolerant::Type);
 
-our $VERSION = '1.550';
+our $VERSION = '1.600';
 
 sub construct { shift;
   ($_[0],$_[1]) = sort { $a <=> $b } ($_[0],$_[1]);
