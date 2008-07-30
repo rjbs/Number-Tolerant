@@ -19,7 +19,7 @@ BEGIN { use_ok("Number::Tolerant"); }
 }
 
 { # bad string
-	my $tol = Number::Tolerant->from_string("is this thing on?");
+	my $tol = eval { Number::Tolerant->from_string("is this thing on?") };
 	is($tol, undef, "invalid string: undef");
 }
 

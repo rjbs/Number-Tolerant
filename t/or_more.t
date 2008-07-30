@@ -1,4 +1,4 @@
-use Test::More tests => 69;
+use Test::More tests => 71;
 
 use strict;
 use warnings;
@@ -97,6 +97,11 @@ is($guess->numify, undef, " ... numifies to undef");
   }
   { # algebraic
 	  my $tol = Number::Tolerant->from_string(">= 10");
+    isa_ok($tol, 'Number::Tolerant');
+    is($tol, "10 <= x", "or_more");
+  }
+  { # from own notation
+	  my $tol = Number::Tolerant->from_string("10 <= x");
     isa_ok($tol, 'Number::Tolerant');
     is($tol, "10 <= x", "or_more");
   }

@@ -1,5 +1,14 @@
 Revision history for Number::Tolerant
 
+1.600   2008-07-30
+        Still tolerant after all these years!
+        100% test coverage restored
+
+        THIS MAY BREAK YOUR CODE:
+        "return undef on error" has been replaced by "throw exception on error"
+        ...when creating a tolerance with bogus args
+        ...and intersecting a tolerance with a constant outside its range
+
 1.556   2006-06-11
         perl critic, and other minor format/packaging changes
 

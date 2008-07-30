@@ -16,122 +16,122 @@ is(
 );
 
 is(
-	Number::Tolerant->new(5 => 'thingie' => 0.5),
+	eval { Number::Tolerant->new(5 => 'thingie' => 0.5) },
 	undef,
 	"there is no 'thingie' method"
 );
 
 is(
-	Number::Tolerant->new(5 => 'to'),
+	eval { Number::Tolerant->new(5 => 'to') },
 	undef,
 	"'to' requires two values"
 );
 
 is(
-	Number::Tolerant->new(5 => to => 'life'),
+	eval { Number::Tolerant->new(5 => to => 'life') },
 	undef,
 	"'to' requires two numbers"
 );
 
 is(
-	Number::Tolerant->new(5 => 'plus_or_minus'),
+	eval { Number::Tolerant->new(5 => 'plus_or_minus') },
 	undef,
 	"'plus_or_minus' requires two values"
 );
 
 is(
-	Number::Tolerant->new(5 => 'plus_or_minus_pct'),
+	eval { Number::Tolerant->new(5 => 'plus_or_minus_pct') },
 	undef,
 	"'plus_or_minus_pct' requires two values"
 );
 
 is(
-	Number::Tolerant->new(5 => 'plus_or_minus' => 'zero'),
+	eval { Number::Tolerant->new(5 => 'plus_or_minus' => 'zero') },
 	undef,
 	"'plus_or_minus' requires two numbers"
 );
 
 is(
-	Number::Tolerant->new(5 => 'plus_or_minus_pct' => 'zero'),
+	eval { Number::Tolerant->new(5 => 'plus_or_minus_pct' => 'zero') },
 	undef,
 	"'plus_or_minus_pct' requires two numbers"
 );
 
 is(
-	Number::Tolerant->new(five => 'exactly'),
+	eval { Number::Tolerant->new(five => 'exactly') },
 	undef,
 	"invalid two-arg construction"
 );
 
 is(
-	Number::Tolerant->new(just_about => 12),
+	eval { Number::Tolerant->new(just_about => 12) },
 	undef,
 	"invalid two-arg construction"
 );
 
 is(
-	Number::Tolerant->new(),
+	eval { Number::Tolerant->new() },
 	undef,
 	"at least one param required"
 );
 
 is(
-	Number::Tolerant->new('things'),
+	eval { Number::Tolerant->new('things') },
 	undef,
 	"single, non-numeric argument"
 );
 
 is(
-	Number::Tolerant->new(undef),
+	eval { Number::Tolerant->new(undef) },
 	undef,
 	"single, undefined argument"
 );
 
 is(
-	Number::Tolerant->new(''),
+	eval { Number::Tolerant->new('') },
 	undef,
 	"single, pseudo-numeric argument"
 );
 
 is(
-	Number::Tolerant->new(undef , 'to' , undef),
+	eval { Number::Tolerant->new(undef , 'to' , undef) },
 	undef,
 	"undef-undef range not valid (should it be?)"
 );
 
 is(
-	Number::Tolerant->new('string' => 'broken' => 'args'),
+	eval { Number::Tolerant->new('string' => 'broken' => 'args') },
 	undef,
 	"three invalid params"
 );
 
 # let's pander to offset's four-parters:
 is(
-	Number::Tolerant->new('string' => 'broken' => 'args' => 'fourway'),
+	eval { Number::Tolerant->new('string' => 'broken' => 'args' => 'fourway') },
 	undef,
 	"four lousy params"
 );
 
 is(
-	Number::Tolerant->new(10 => 'broken' => 'args' => 'fourway'),
+	eval { Number::Tolerant->new(10 => 'broken' => 'args' => 'fourway') },
 	undef,
 	"number, then three invalid params"
 );
 
 is(
-	Number::Tolerant->new(10 => 'offset' => 'args' => 'fourway'),
+	eval { Number::Tolerant->new(10 => 'offset' => 'args' => 'fourway') },
 	undef,
 	"10 offset blah blah",
 );
 
 is(
-	Number::Tolerant->new(10 => 'offset' => 3 => 'fourway'),
+	eval { Number::Tolerant->new(10 => 'offset' => 3 => 'fourway') },
 	undef,
 	"10 offset number blah"
 );
 
 is(
-	Number::Tolerant->new(10 => 'offset' => undef => 4),
+	eval { Number::Tolerant->new(10 => 'offset' => undef => 4) },
 	undef,
 	"10 offset undef number"
 );

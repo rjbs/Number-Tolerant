@@ -27,15 +27,15 @@ BEGIN { use_ok("Number::Tolerant::Constant"); }
   { # failures!
     for ("0=0", '-1-', 'six') {
       {
-        my $tol = Number::Tolerant->from_string($_);
+        my $tol = eval { Number::Tolerant->from_string($_) };
         ok(!$tol, "intolerable string!");
       }
       {
-        my $tol = tolerance($_);
+        my $tol = eval { tolerance($_) };
         ok(!$tol, "intolerable param!");
       }
     }
-    is(tolerance(10,20,30), undef, "bogus tolerance");
+    is(eval { tolerance(10,20,30) }, undef, "bogus tolerance");
   }
 }
 

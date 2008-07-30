@@ -98,6 +98,9 @@ tolerances:
 
 The first will sort as numerically less than the second.
 
+If the given arguments can't be formed into a tolerance, an exception will be
+raised.
+
 =cut
 
 # these are the default plugins
@@ -171,7 +174,7 @@ sub new {
     last;
   }
 
-  return unless $self;
+  Carp::confess("couldn't form tolerance from given args") unless $self;
   bless $self => $self->{method};
 }
 
@@ -187,6 +190,8 @@ tolerance.  For example:
 This will I<not> yet parse stringified unions, but that will be implemented in
 the future.  (I just don't need it yet.)
 
+If a string can't be parsed, an exception is raised.
+
 =cut
 
 sub from_string {
@@ -197,7 +202,8 @@ sub from_string {
       return $tolerance;
     }
   }
-  return;
+
+  Carp::confess("couldn't form tolerance from given string");
 }
 
 sub stringify {
@@ -272,7 +278,10 @@ sub _union {
 }
 
 sub _intersection {
-  return $_[0] == $_[1] ? $_[1] : () unless ref $_[1];
+  if (! ref $_[1]) {
+    return $_[1] if $_[0] == $_[1];
+    Carp::confess "no valid intersection of ($_[0]) and ($_[1])";
+  }
 
   my ($min, $max);
   my ($exclude_min, $exclude_max);

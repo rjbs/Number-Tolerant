@@ -15,7 +15,7 @@ BEGIN { use_ok("Number::Tolerant"); }
 	is($range & 6.5,   6.5, ' ... $range & 6.5 == 6.5');
 	is($range & 6.5,   6.5, ' ... 6.5 & $range == 6.5');
 
-	is($range & 1.0, undef, ' ... 6.5 & $range == 6.5');
+	ok(! eval { $range & 1.0 }, ' ... 6.5 & $range == exception');
 }
 
 {
