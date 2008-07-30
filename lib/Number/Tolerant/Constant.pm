@@ -12,8 +12,6 @@ Number::Tolerant::Constant - a blessed constant type
 
 version 1.550
 
- $Id$
-
 =head1 SYNOPSIS
 
  use Number::Tolerant;

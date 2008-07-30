@@ -22,8 +22,6 @@ Number::Tolerant - tolerance ranges for inexact numbers
 
 version 1.550
 
- $Id$
-
 =head1 SYNOPSIS
 
  use Number::Tolerant;

@@ -14,8 +14,6 @@ Number::Tolerant::Type - a type of tolerance
 
 version 1.550
 
- $Id$
-
 =head1 SYNOPSIS
 
 =cut
