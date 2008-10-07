@@ -4,7 +4,7 @@ use warnings;
 package Number::Tolerant::Type::less_than;
 use base qw(Number::Tolerant::Type);
 
-our $VERSION = '1.600';
+our $VERSION = '1.601';
 
 sub construct { shift; { value => $_[0], max => $_[0], exclude_max => 1 } }
 

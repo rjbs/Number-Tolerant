@@ -4,7 +4,7 @@ use warnings;
 package Number::Tolerant::Type::offset;
 use base qw(Number::Tolerant::Type);
 
-our $VERSION = '1.600';
+our $VERSION = '1.601';
 
 sub construct { shift;
   {

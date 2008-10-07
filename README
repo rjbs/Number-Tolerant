@@ -1,4 +1,4 @@
-README for Number::Tolerant
+README for Number::Tolerant 1.601
 
 Number::Tolerant creates a number-like object whose value refers to a range of
 possible values, each equally acceptable. It overloads comparison operations to
