@@ -43,8 +43,6 @@ t/plusminus.t
 t/plusminus_0.t
 t/plusminus_pct.t
 t/plusminus_pct_0.t
-t/pod-coverage.t
-t/pod.t
 t/stringify_as.t
 t/union.t
 t/union_and.t
@@ -52,5 +50,4 @@ t/union_more.t
 t/x_to_x.t
 t/x_to_y.t
 t/y_to_x.t
-t/perl-critic.t
 LICENSE
