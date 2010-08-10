@@ -206,15 +206,21 @@ sub from_string {
 
 sub stringify {
   my ($self) = @_;
-  return 'any number' unless $self->{min} || $self->{max};
+
+  return 'any number' unless (defined $self->{min} || defined $self->{max});
+
   my $string = '';
-  if ($self->{min}) {
+
+  if (defined $self->{min}) {
     $string .= "$self->{min} <" . ($self->{exclude_min} ? q{} : '=') . q{ };
   }
+
   $string .= 'x';
-  if ($self->{max}) {
+
+  if (defined $self->{max}) {
     $string .= ' <' . ($self->{exclude_max} ? q{} : '=') .  " $self->{max}";
   }
+
   return $string;
 }
 
