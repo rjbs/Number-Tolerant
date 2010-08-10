@@ -295,6 +295,7 @@ sub _intersection {
   } else {
     $min = $_[0]->{min} || $_[1]->{min};
   }
+
   $exclude_min = 1
     if ($_[0]{min} and $min == $_[0]{min} and $_[0]{exclude_min})
     or ($_[1]{min} and $min == $_[1]{min} and $_[1]{exclude_min});
@@ -304,15 +305,22 @@ sub _intersection {
   } else {
     $max = $_[0]->{max} || $_[1]->{max};
   }
+
   $exclude_max = 1
     if ($_[0]{max} and $max == $_[0]{max} and $_[0]{exclude_max})
     or ($_[1]{max} and $max == $_[1]{max} and $_[1]{exclude_max});
 
   return $_[0]->new('infinite') unless defined $min || defined $max;
+
   return $_[0]->new($min => ($exclude_min ? 'more_than' : 'or_more'))
     unless defined $max;
+
   return $_[0]->new($max => ($exclude_max ? 'less_than' : 'or_less'))
     unless defined $min;
+
+  Carp::confess "no valid intersection of ($_[0]) and ($_[1])"
+    if $max < $min or $min > $max;
+
   bless {
     max => $max,
     min => $min,
