@@ -24,7 +24,8 @@ sub parse {
 
 sub valid_args {
   my $self = shift;
-  my $number = $self->number_re;
+
+  my $number = $self->anchored_number_re;
 
   if ((grep { defined } @_) == 2) {
     return ($_[1]) if ($_[1] =~ $number) and ($_[0] eq 'more_than');

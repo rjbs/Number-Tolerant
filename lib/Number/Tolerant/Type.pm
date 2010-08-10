@@ -51,10 +51,15 @@ number in parsed strings.
 
 =cut
 
-my $number;
-BEGIN { $number = qr/(?:[+-]?)(?=\d|\.\d)\d*(?:\.\d*)?(?:[Ee](?:[+-]?\d+))?/; }
+my ($number, $anchored_number);
+BEGIN {
+  $number = qr/(?:[+-]?)(?=\d|\.\d)\d*(?:\.\d*)?(?:[Ee](?:[+-]?\d+))?/;
+  $anchored_number = qr/\A$number\z/;
+}
 
 sub number_re { return $number; }
+
+sub anchored_number_re { return $anchored_number }
 
 =head2 variable_re
 

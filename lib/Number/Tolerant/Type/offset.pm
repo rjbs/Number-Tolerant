@@ -34,7 +34,7 @@ sub stringify {
 
 sub valid_args {
   my $self = shift;
-  my $number = $self->number_re;
+  my $number = $self->anchored_number_re;
 
   return ($_[0],$_[2], $_[3])
     if  (grep { defined } @_) == 4

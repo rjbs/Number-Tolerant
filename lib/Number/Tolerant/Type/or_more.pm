@@ -23,7 +23,7 @@ sub parse {
 
 sub valid_args {
   my $self = shift;
-  my $number = $self->number_re;
+  my $number = $self->anchored_number_re;
 
   return ($_[0])
     if ((grep { defined } @_) == 2)

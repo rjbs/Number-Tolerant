@@ -29,7 +29,7 @@ sub stringify { "$_[0]->{value} +/- $_[0]->{variance}"  }
 
 sub valid_args {
   my $self = shift;
-  my $number = $self->number_re;
+  my $number = $self->anchored_number_re;
 
   return ($_[0],$_[2])
     if ((grep { defined } @_) == 3)
