@@ -24,7 +24,6 @@ sub parse {
 
 sub valid_args {
   my $self = shift;
-  my $number = $self->anchored_number_re;
 
   return unless 2 == grep { defined } @_;
   return unless $_[1] eq 'or_less';

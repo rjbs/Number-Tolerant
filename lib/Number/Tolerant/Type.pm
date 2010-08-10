@@ -54,7 +54,7 @@ number in parsed strings.
 
 =cut
 
-my ($number, $anchored_number);
+my $number;
 BEGIN {
   $number = qr{
     (?:
@@ -69,19 +69,17 @@ BEGIN {
       [0-9]+ / [1-9][0-9]*
     )
   }x;
-  $anchored_number = qr/\A$number\z/;
 }
 
 sub number_re { return $number; }
-sub anchored_number_re { return $anchored_number; }
 
 sub normalize_number {
   my ($self, $input) = @_;
 
   return if not defined $input;
   
-  if ($input =~ $anchored_number) {
-    my $class = $input =~ m{/} ? 'Math::BigRat' : 'Math::BigFloat';
+  if ($input =~ qr{\A$number\z}) {
+    my $class = $input =~ m{/} ? 'Math::BigRat' : 'Math::BigRat';
     return $class->new($input);
   }
 
