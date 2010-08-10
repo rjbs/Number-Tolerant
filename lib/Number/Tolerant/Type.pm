@@ -65,7 +65,7 @@ sub anchored_number_re { return $anchored_number }
 
   my $variable_re = $type_class->variable_re;
 
-This method returns the regular expression (as a C<qx> construct) used to match
+This method returns the regular expression (as a C<qr> construct) used to match
 the variable in parsed strings.
 
 When parsing "4 <= x <= 10" this regular expression is used to match the letter
