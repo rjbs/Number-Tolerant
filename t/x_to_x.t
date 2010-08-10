@@ -1,4 +1,4 @@
-use Test::More tests => 45;
+use Test::More 0.88;
 
 use strict;
 use warnings;
@@ -9,7 +9,10 @@ my $guess = Number::Tolerant->new(5 => to => 5);
 
 ok($guess, "created our object");
 
-is(ref $guess, '',        " ... is not a reference");
+ok(
+  ! eval { $guess->isa('Number::Tolerant') },
+  ' ... is not a Number::Tolerant',
+);
 
 is("$guess", "5",         " ... stringifies properly");
 is(0+$guess, 5,           " ... numifies properly");
@@ -63,3 +66,5 @@ ok(not( $guess > 5.6),    " ... it isn't more than 5.6");
 is( ($guess <=> 4), +1,   " ... 4 <=> it is -1");
 is( ($guess <=> 5),  0,   " ... 5 <=> it is  0");
 is( ($guess <=> 6), -1,   " ... 6 <=> it is +1");
+
+done_testing;

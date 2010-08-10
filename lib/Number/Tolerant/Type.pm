@@ -4,6 +4,9 @@ use warnings;
 package Number::Tolerant::Type;
 use base qw(Number::Tolerant);
 
+use Math::BigFloat;
+use Math::BigRat;
+
 our $VERSION = "1.601";
 
 =head1 NAME
@@ -53,13 +56,40 @@ number in parsed strings.
 
 my ($number, $anchored_number);
 BEGIN {
-  $number = qr/(?:[+-]?)(?=\d|\.\d)\d*(?:\.\d*)?(?:[Ee](?:[+-]?\d+))?/;
+  $number = qr{
+    (?:
+      (?:[+-]?)
+      (?=[0-9]|\.[0-9])
+      [0-9]*
+      (?:\.[0-9]*)?
+      (?:[Ee](?:[+-]?[0-9]+))?
+    )
+    |
+    (?:
+      [0-9]+ / [1-9][0-9]*
+    )
+  }x;
   $anchored_number = qr/\A$number\z/;
 }
 
 sub number_re { return $number; }
+sub anchored_number_re { return $anchored_number; }
 
-sub anchored_number_re { return $anchored_number }
+sub normalize_number {
+  my ($self, $input) = @_;
+
+  return if not defined $input;
+  
+  if ($input =~ $anchored_number) {
+    my $class = $input =~ m{/} ? 'Math::BigRat' : 'Math::BigFloat';
+    return $class->new($input);
+  }
+
+  local $@;
+  return $input if ref $input and eval { $input->isa('Math::BigInt') };
+
+  return;
+}
 
 =head2 variable_re
 

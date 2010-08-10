@@ -106,5 +106,8 @@ is( ($guess <=> 6), -1,   " ... 6 <=> it is +1");
 {
   Number::Tolerant::Constant->_disable;
   my $const = Number::Tolerant->from_string("1");
-  ok(!ref($const), "1 as tolerance is plain scalar after 'N::T::C->_disable'");
+  ok(
+    ! eval { $const->isa('Number::Tolerant') },
+    "1 as tolerance is not an N::T object after 'N::T::C->_disable'"
+  );
 }

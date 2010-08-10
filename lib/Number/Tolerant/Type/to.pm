@@ -32,12 +32,14 @@ sub parse {
 
 sub valid_args {
   my $self = shift;
-  my $number = $self->anchored_number_re;
 
-  return ($_[0],$_[2])
-    if ((grep { defined } @_) == 3)
-    and ($_[0] =~ $number) and ($_[1] eq 'to') and ($_[2] =~ $number);
-  return;
+  return unless 3 == grep { defined } @_;
+  return unless $_[1] eq 'to';
+
+  return unless defined (my $from = $self->normalize_number($_[0]));
+  return unless defined (my $to   = $self->normalize_number($_[2]));
+
+  return ($from, $to);
 }
 
 1;

@@ -25,12 +25,17 @@ sub parse {
 sub valid_args {
   my $self = shift;
 
-  my $number = $self->anchored_number_re;
+  return unless 2 == grep { defined } @_;
 
-  if ((grep { defined } @_) == 2) {
-    return ($_[1]) if ($_[1] =~ $number) and ($_[0] eq 'less_than');
-    return ($_[0]) if ($_[0] =~ $number) and ($_[1] eq 'less_than');
+  for my $i ( [0,1], [1,0] ) {
+    if (
+      $_[ $i->[0] ] eq 'less_than'
+      and defined (my $num = $self->normalize_number($_[ $i->[1] ]))
+    ) {
+      return $num;
+    }
   }
+
   return;
 }
 

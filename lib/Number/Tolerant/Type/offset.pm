@@ -34,14 +34,17 @@ sub stringify {
 
 sub valid_args {
   my $self = shift;
-  my $number = $self->anchored_number_re;
 
-  return ($_[0],$_[2], $_[3])
+  my $lhs_number   = $self->normalize_number($_[0]);
+  my $minus_number = $self->normalize_number($_[2]);
+  my $plus_number  = $self->normalize_number($_[3]);
+
+  return ($lhs_number, $minus_number, $plus_number)
     if  (grep { defined } @_) == 4
-    and $_[0] =~ $number
+    and defined $lhs_number
     and $_[1] eq 'offset'
-    and $_[2] =~ $number
-    and $_[3] =~ $number;
+    and defined $minus_number
+    and defined $plus_number;
 
   return;
 }

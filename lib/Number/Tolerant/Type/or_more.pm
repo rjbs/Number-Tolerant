@@ -25,10 +25,10 @@ sub valid_args {
   my $self = shift;
   my $number = $self->anchored_number_re;
 
-  return ($_[0])
-    if ((grep { defined } @_) == 2)
-    and ($_[0] =~ $number) and ($_[1] eq 'or_more');
-  return;
+  return unless 2 == grep { defined } @_;
+  return unless $_[1] eq 'or_more';
+
+  return $self->normalize_number($_[0]);
 }
 
 1;

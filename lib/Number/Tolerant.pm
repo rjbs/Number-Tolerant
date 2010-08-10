@@ -13,6 +13,7 @@ use Sub::Exporter -setup => {
 };
 
 use Carp ();
+use Scalar::Util ();
 
 =head1 NAME
 
@@ -158,7 +159,7 @@ sub new {
     next unless my @args = $type->valid_args(@_);
     my $guts = $type->construct(@args);
 
-    return $guts unless ref $guts;
+    return $guts unless ref $guts and not Scalar::Util::blessed($guts);
 
     if (
       defined $guts->{min} and defined $guts->{max} and

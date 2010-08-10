@@ -8,12 +8,18 @@ BEGIN { use_ok("Number::Tolerant"); }
 { # constant (without Constant)
   { # integer
 	  my $tol = Number::Tolerant->from_string("1012");
-    is(ref $tol, '', "a constant isn't really blessed");
+    ok(
+      ! eval { $tol->isa('Number::Tolerant') },
+      "a constant isn't a Number::Tolerant type",
+    );
     is($tol, "1012", "constant:  1012");
   }
   { # rational
 	  my $tol = Number::Tolerant->from_string("10.12");
-    is(ref $tol, '', "a constant isn't really blessed");
+    ok(
+      ! eval { $tol->isa('Number::Tolerant') },
+      "a constant isn't a Number::Tolerant type",
+    );
     is($tol, "10.12", "constant: 10.12");
   }
 }

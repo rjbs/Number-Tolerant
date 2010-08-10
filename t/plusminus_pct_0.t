@@ -9,7 +9,10 @@ my $guess = Number::Tolerant->new(5 => plus_or_minus_pct => 0);
 
 ok($guess, "created our object");
 
-is(ref $guess, '',        " ... is not a reference");
+ok(
+  ! eval { $guess->isa('Number::Tolerant') },
+  ' ... is not a Number::Tolerant',
+);
 
 is("$guess", "5",         " ... stringifies properly");
 is(0+$guess, 5,           " ... numifies properly");

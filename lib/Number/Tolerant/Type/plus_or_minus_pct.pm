@@ -28,14 +28,14 @@ sub stringify { "$_[0]->{value} +/- $_[0]->{variance}%" }
 
 sub valid_args {
   my $self = shift;
-  my $number = $self->anchored_number_re;
 
-  return ($_[0],$_[2])
-    if ((grep { defined } @_) == 3)
-    and ($_[0] =~ $number)
-    and ($_[1] eq 'plus_or_minus_pct')
-    and ($_[2] =~ $number);
-  return;
+  return unless 3 == grep { defined } @_;
+  return unless $_[1] eq 'plus_or_minus_pct';
+
+  return unless defined (my $base = $self->normalize_number($_[0]));
+  return unless defined (my $var  = $self->normalize_number($_[2]));
+
+  return ($base, $var);
 }
 
 1;
