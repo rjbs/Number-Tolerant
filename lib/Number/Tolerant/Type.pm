@@ -52,6 +52,17 @@ if the given string can be parsed into a tolerance of this type.
 This method returns the regular expression (as a C<qx> construct) used to match
 number in parsed strings.
 
+=head2 normalize_number
+
+  my $number = $type_class->normalize_number($input);
+
+This method will decide whether the given input is a valid number for use with
+Number::Tolerant and return it in a canonicalized form.  Math::BigInt objects
+are returned intact.  Strings holding numbers are also returned intact.
+Strings that appears to be fractions are converted to Math::BigRat objects.
+
+Anything else is considered invalid, and the method will return false.
+
 =cut
 
 my $number;
