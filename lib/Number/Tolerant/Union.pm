@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package Number::Tolerant::Union;
-our $VERSION = "1.601";
+our $VERSION = "1.700";
 
 =head1 NAME
 
@@ -10,7 +10,7 @@ Number::Tolerant::Union - unions of tolerance ranges
 
 =head1 VERSION
 
-version 1.601
+version 1.700
 
 =head1 SYNOPSIS
 

@@ -23,7 +23,6 @@ lib/Number/Tolerant/Type/to.pm
 lib/Number/Tolerant/Union.pm
 Makefile.PL
 MANIFEST			This list of files
-META.yml			Module meta-data (added by MakeMaker)
 README
 t/00-load.t
 t/and_constant.t

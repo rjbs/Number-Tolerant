@@ -1,5 +1,13 @@
 Revision history for Number::Tolerant
 
+1.700   2010-08-10
+        major changes to support rational numbers via BigRat; n +/- a/b
+
+        refuse to build impossible intersections as previously promised
+          (now fatal, as all previous undef-on-failures became in 1.600)
+
+        several "0 treated like undef" bugs fixed
+
 1.601   2008-10-06
         remove tests that non-author testers should not run
 
