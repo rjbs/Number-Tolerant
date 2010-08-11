@@ -1,4 +1,4 @@
-use Test::More tests => 46;
+use Test::More 0.88;
 
 use strict;
 use warnings;
@@ -66,5 +66,18 @@ is( ($guess <=> 6), -1,   " ... 6 <=> it is +1");
 { # from_string
 	my $tol = Number::Tolerant->from_string("10 +/- 10%");
   isa_ok($tol, 'Number::Tolerant');
-	is($tol, "10 +/- 10%", "plus_or_minus_pct");
+	is($tol, "10 +/- 10%", " ... stringifies as plus_or_minus_pct");
 }
+
+{ # with a rational
+  my $tol = Number::Tolerant->new(1_000 => plus_or_minus_pct => '1/2');
+  isa_ok($tol, 'Number::Tolerant');
+  ok($tol !=  994, " ...  994 not in $tol");
+  ok($tol ==  995, " ...  995  is in $tol");
+  ok($tol ==  996, " ...  996  is in $tol");
+  ok($tol == 1004, " ... 1004  is in $tol");
+  ok($tol == 1005, " ... 1005  is in $tol");
+  ok($tol != 1006, " ... 1006 not in $tol");
+}
+
+done_testing;
