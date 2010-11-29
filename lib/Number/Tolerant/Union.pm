@@ -1,16 +1,7 @@
 use strict;
 use warnings;
-
 package Number::Tolerant::Union;
-our $VERSION = "1.700";
-
-=head1 NAME
-
-Number::Tolerant::Union - unions of tolerance ranges
-
-=head1 VERSION
-
-version 1.700
+# ABSTRACT: unions of tolerance ranges
 
 =head1 SYNOPSIS
 
@@ -104,6 +95,8 @@ Options that have no intersection with the new element are dropped.  The
 intersection of a constant number and a union yields that number, if the number
 was in the union's ranges and otherwise yields nothing.
 
+=back
+
 =cut
 
 use overload
@@ -136,20 +129,9 @@ use overload
 		},
 	fallback => 1;
 
-=back
-
 =head1 TODO
 
 Who knows.  Collapsing overlapping options, probably.
-
-=head1 AUTHOR
-
-Ricardo SIGNES, E<lt>rjbs@cpan.orgE<gt>
-
-=head1 COPYRIGHT
-
-(C) 2004, Ricardo SIGNES.  Number::Tolerant::Union is available under the same
-terms as Perl itself.
 
 =cut
 

@@ -1,21 +1,11 @@
 use strict;
 use warnings;
-
 package Number::Tolerant::Type;
 use base qw(Number::Tolerant);
+# ABSTRACT: a type of tolerance
 
 use Math::BigFloat;
 use Math::BigRat;
-
-our $VERSION = "1.700";
-
-=head1 NAME
-
-Number::Tolerant::Type - a type of tolerance
-
-=head1 VERSION
-
-version 1.700
 
 =head1 SYNOPSIS
 
@@ -117,24 +107,5 @@ my $X;
 BEGIN { $X =  qr/(?:\s*x\s*)/; }
 
 sub variable_re { return $X; }
-
-=head1 SEE ALSO
-
-=over 4
-
-=item * L<Number::Tolerant>
-
-=back
-
-=head1 AUTHOR
-
-Ricardo SIGNES, E<lt>rjbs@cpan.orgE<gt>
-
-=head1 COPYRIGHT
-
-(C) 2004-2006, Ricardo SIGNES.  Number::Tolerant is available under the same
-terms as Perl itself.
-
-=cut
 
 1;

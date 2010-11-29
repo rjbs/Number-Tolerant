@@ -1,10 +1,9 @@
 use strict;
 use warnings;
 
-package Number::Tolerant::Type::plus_or_minus_pct;
+package
+  Number::Tolerant::Type::plus_or_minus_pct;
 use base qw(Number::Tolerant::Type);
-
-our $VERSION = '1.700';
 
 sub construct { shift;
   {

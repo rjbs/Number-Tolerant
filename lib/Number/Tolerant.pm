@@ -1,27 +1,16 @@
 use strict;
 use warnings;
-
 package Number::Tolerant;
-use base qw(Exporter);
-
-our $VERSION = "1.700";
+# ABSTRACT: tolerance ranges for inexact numbers
 
 use Sub::Exporter::Util;
-use Sub::Exporter -setup => {
+use Sub::Exporter 0.950 -setup => {
   exports => { tolerance => Sub::Exporter::Util::curry_class('new'), },
   groups  => { default   => [ qw(tolerance) ] },
 };
 
 use Carp ();
 use Scalar::Util ();
-
-=head1 NAME
-
-Number::Tolerant - tolerance ranges for inexact numbers
-
-=head1 VERSION
-
-version 1.700
 
 =head1 SYNOPSIS
 
@@ -505,15 +494,6 @@ the minimum required perl up to 5.8
 
 Thanks to Tom Freedman, who reminded me that this code was fun to work on, and
 also provided the initial implementation for the offset type.
-
-=head1 AUTHOR
-
-Ricardo SIGNES, E<lt>rjbs@cpan.orgE<gt>
-
-=head1 COPYRIGHT
-
-(C) 2004-2006, Ricardo SIGNES.  Number::Tolerant is available under the same
-terms as Perl itself.
 
 =cut
 

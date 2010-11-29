@@ -1,16 +1,7 @@
 use strict;
 use warnings;
-
 package Number::Tolerant::Constant;
-our $VERSION = "1.700";
-
-=head1 NAME
-
-Number::Tolerant::Constant - a blessed constant type
-
-=head1 VERSION
-
-version 1.700
+# ABSTRACT: a blessed constant type
 
 =head1 SYNOPSIS
 
@@ -31,7 +22,8 @@ would otherwise complain that the constructor hadn't returned a blessed object.
 
 =cut
 
-package Number::Tolerant::Type::constant_obj;
+package
+  Number::Tolerant::Type::constant_obj;
 use base qw(Number::Tolerant::Type);
 
 sub construct { shift;
@@ -71,18 +63,5 @@ sub _disable {
   Number::Tolerant->disable_plugin("Number::Tolerant::Type::constant_obj");
   Number::Tolerant->enable_plugin( "Number::Tolerant::Type::constant");
 }
-
-=head1 TODO
-
-=head1 AUTHOR
-
-Ricardo SIGNES, E<lt>rjbs@cpan.orgE<gt>
-
-=head1 COPYRIGHT
-
-(C) 2004-2006, Ricardo SIGNES.  Number::Tolerant::Constant is available under
-the same terms as Perl itself.
-
-=cut
 
 1;

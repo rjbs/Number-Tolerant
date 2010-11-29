@@ -1,14 +1,7 @@
 use strict;
 use warnings;
 package Test::Tolerant;
-
-=head1 NAME
-
-Test::Tolerant - test routines for testing numbers against tolerances
-
-=head1 VERSION
-
-version 1.700
+# ABSTRACT: test routines for testing numbers against tolerances
 
 =head1 SYNOPSIS
 
@@ -90,16 +83,5 @@ sub is_tol {
 
   return 0;
 }
-
-=head1 AUTHOR
-
-Ricardo SIGNES, E<lt>rjbs@cpan.orgE<gt>
-
-=head1 COPYRIGHT
-
-(C) 2010, Ricardo SIGNES.  Test::Tolerant is available under the same terms as
-Perl itself.
-
-=cut
 
 1;

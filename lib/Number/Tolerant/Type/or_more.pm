@@ -1,10 +1,9 @@
 use strict;
 use warnings;
 
-package Number::Tolerant::Type::or_more;
+package
+  Number::Tolerant::Type::or_more;
 use base qw(Number::Tolerant::Type);
-
-our $VERSION = '1.700';
 
 sub construct { shift; { value => $_[0], min => $_[0] } }
 
