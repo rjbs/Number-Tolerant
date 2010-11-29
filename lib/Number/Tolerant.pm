@@ -277,12 +277,16 @@ sub _num_lt_canonical {
   defined $_[0]->{max} ? $_[1] >  $_[0]->{max} : undef
 }
 
-sub _union {
+sub _union { $_[0]->union($_[1]); }
+
+sub union {
   require Number::Tolerant::Union;
   return Number::Tolerant::Union->new($_[0],$_[1]);
 }
 
-sub _intersection {
+sub _intersection { $_[0]->intersection($_[1]); }
+
+sub intersection {
   if (! ref $_[1]) {
     return $_[1] if $_[0] == $_[1];
     Carp::confess "no valid intersection of ($_[0]) and ($_[1])";
