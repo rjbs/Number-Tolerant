@@ -1,5 +1,9 @@
 Revision history for Number::Tolerant
 
+1.701   2010-11-29
+
+        include Test::Tolerant
+
 1.700   2010-08-10
         major changes to support rational numbers via BigRat; n +/- a/b
 
