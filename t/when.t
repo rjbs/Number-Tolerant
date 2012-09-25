@@ -4,10 +4,8 @@ use strict;
 use warnings;
 
 BEGIN {
-  if ($^V lt v5.10.0) {
-    plan skip_all => "switch only in Perl 5.10 and newer";
-    exit;
-  }
+  plan skip_all => "switch only in Perl 5.10 and newer"
+      if $^V lt v5.10.0;
 }
 use feature qw<switch>;
 
