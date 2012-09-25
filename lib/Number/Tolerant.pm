@@ -367,6 +367,10 @@ like "m < x < n"
 A number is equal to a tolerance if it is neither less than nor greater than
 it.  (See below).
 
+=item smart match
+
+Same as equality.
+
 =item comparison
 
 A number is greater than a tolerance if it is greater than its maximum value.
@@ -410,6 +414,7 @@ use overload
   },
   '""' => 'stringify',
   '==' => '_num_eq',
+  '~~' => '_num_eq',
   '!=' => '_num_ne',
   '>'  => '_num_gt',
   '<'  => '_num_lt',

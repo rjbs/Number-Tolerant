@@ -1,6 +1,7 @@
 Revision history for Number::Tolerant
 
 {{$NEXT}}
+        - overload tolerances for ~~ operator (thanks, Smylers!)
 
 1.702     2013-10-07 10:22:17 America/New_York
           update bugtracker
