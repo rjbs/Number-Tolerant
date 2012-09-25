@@ -3,6 +3,12 @@ use Test::More;
 use strict;
 use warnings;
 
+BEGIN {
+  if ($^V lt v5.10.0) {
+    plan skip_all => "switch only in Perl 5.10 and newer";
+    exit;
+  }
+}
 use feature qw<switch>;
 
 use Number::Tolerant;
