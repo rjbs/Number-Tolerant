@@ -1,5 +1,8 @@
 Revision history for Number::Tolerant
 
+1.702   TBA
+        overload smart matching, as used by when [Smylers]
+
 1.701   2010-11-29
 
         include Test::Tolerant
