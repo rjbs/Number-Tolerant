@@ -1,5 +1,10 @@
 Revision history for Number::Tolerant
 
+{{$NEXT}}
+          update bugtracker
+
+          fix spelling; thanks, Alexandre Mestiashvili!
+
 1.701   2010-11-29
 
         include Test::Tolerant
