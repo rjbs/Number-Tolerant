@@ -3,7 +3,7 @@ use warnings;
 
 package
   Number::Tolerant::Type::less_than;
-use base qw(Number::Tolerant::Type);
+use parent qw(Number::Tolerant::Type);
 
 sub construct { shift; { value => $_[0], max => $_[0], exclude_max => 1 } }
 

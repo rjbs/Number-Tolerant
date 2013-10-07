@@ -3,7 +3,7 @@ use warnings;
 
 package
   Number::Tolerant::Type::plus_or_minus_pct;
-use base qw(Number::Tolerant::Type);
+use parent qw(Number::Tolerant::Type);
 
 sub construct { shift;
   {

@@ -3,7 +3,7 @@ use warnings;
 
 package
   Number::Tolerant::Type::constant;
-use base qw(Number::Tolerant::Type);
+use parent qw(Number::Tolerant::Type);
 
 sub construct { shift; $_[0] }
 

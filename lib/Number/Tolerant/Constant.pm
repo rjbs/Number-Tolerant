@@ -24,7 +24,7 @@ would otherwise complain that the constructor hadn't returned a blessed object.
 
 package
   Number::Tolerant::Type::constant_obj;
-use base qw(Number::Tolerant::Type);
+use parent qw(Number::Tolerant::Type);
 
 sub construct { shift;
   { value => $_[0], min => $_[0], max => $_[0], constant => 1 }

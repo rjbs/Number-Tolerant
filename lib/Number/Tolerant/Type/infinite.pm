@@ -3,7 +3,7 @@ use warnings;
 
 package
   Number::Tolerant::Type::infinite;
-use base qw(Number::Tolerant::Type);
+use parent qw(Number::Tolerant::Type);
 
 sub construct { shift; { value => 0 } }
 

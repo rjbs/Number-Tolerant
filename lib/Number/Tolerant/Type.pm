@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Number::Tolerant::Type;
-use base qw(Number::Tolerant);
+use parent qw(Number::Tolerant);
 # ABSTRACT: a type of tolerance
 
 use Math::BigFloat;
