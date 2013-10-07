@@ -100,12 +100,14 @@ sub _plugins {
 
 sub disable_plugin {
   my ($class, $plugin) = @_;
+  $class->_boot_up;
   delete $_plugins{ $plugin };
   return;
 }
 
 sub enable_plugin {
   my ($class, $plugin) = @_;
+  $class->_boot_up;
 
   # XXX: there has to be a better test to use here -- rjbs, 2006-01-27
   unless (eval { $plugin->can('construct') }) {
@@ -131,7 +133,8 @@ sub validate_plugin {
 my $booted;
 sub _boot_up {
   return if $booted;
-  my @_default_plugins = 
+  $booted = 1;
+  my @_default_plugins =
     map { "Number::Tolerant::Type::$_" }
     qw(
       constant    infinite        less_than
@@ -141,7 +144,6 @@ sub _boot_up {
     );
 
   __PACKAGE__->enable_plugin($_) for @_default_plugins;
-  $booted = 1;
 }
 
 sub new {

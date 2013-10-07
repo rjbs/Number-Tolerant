@@ -1,10 +1,10 @@
-use Test::More tests => 60;
+use Test::More tests => 58;
 
 use strict;
 use warnings;
 
-BEGIN { use_ok("Number::Tolerant"); }
-BEGIN { use_ok("Number::Tolerant::Constant"); }
+use Number::Tolerant;
+use Number::Tolerant::Constant;
 
 { # constant (with Constant)
   { # integer
