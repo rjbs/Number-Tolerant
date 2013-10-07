@@ -1,9 +1,13 @@
 Revision history for Number::Tolerant
 
 {{$NEXT}}
+
+1.702     2013-10-07 10:22:17 America/New_York
           update bugtracker
 
-          fix spelling; thanks, Alexandre Mestiashvili!
+          avoid circular loading problems (with a nasty hack)
+
+          fix spelling error; thanks, Alexandre Mestiashvili!
 
 1.701   2010-11-29
 
