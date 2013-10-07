@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+# ABSTRACT: a tolerance "m >= n"
 
 package
   Number::Tolerant::Type::or_more;
@@ -7,7 +8,7 @@ use parent qw(Number::Tolerant::Type);
 
 sub construct { shift; { value => $_[0], min => $_[0] } }
 
-sub parse { 
+sub parse {
   my ($self, $string, $factory) = @_;
   my $number = $self->number_re;
   my $X = $self->variable_re;

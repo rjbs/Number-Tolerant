@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+# ABSTRACT: a tolerance "m to n"
 
 package
   Number::Tolerant::Type::to;

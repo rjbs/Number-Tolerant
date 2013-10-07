@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+# ABSTRACT: a tolerance "m (-l or +n)"
 
 package
   Number::Tolerant::Type::offset;

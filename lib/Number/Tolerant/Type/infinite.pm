@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+# ABSTRACT: an infinite tolerance
 
 package
   Number::Tolerant::Type::infinite;

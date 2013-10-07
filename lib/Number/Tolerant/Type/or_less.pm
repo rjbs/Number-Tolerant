@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+# ABSTRACT: a tolerance "m <= n"
 
 package
   Number::Tolerant::Type::or_less;
