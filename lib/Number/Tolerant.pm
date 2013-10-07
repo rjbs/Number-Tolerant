@@ -113,7 +113,7 @@ sub enable_plugin {
   }
 
   unless (eval { $class->validate_plugin($plugin); }) {
-    Carp::croak "class $class is not a valid Number::Tolerant plugin: $@";
+    Carp::croak "class $plugin is not a valid Number::Tolerant plugin: $@";
   }
 
   $_plugins{ $plugin } = undef;
