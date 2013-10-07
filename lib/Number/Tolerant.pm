@@ -128,19 +128,25 @@ sub validate_plugin {
   return 1;
 }
 
-my @_default_plugins = 
-  map { "Number::Tolerant::Type::$_" }
-  qw(
-    constant    infinite        less_than
-    more_than   offset          or_less 
-    or_more     plus_or_minus   plus_or_minus_pct
-    to
-  );
+my $booted;
+sub _boot_up {
+  return if $booted;
+  my @_default_plugins = 
+    map { "Number::Tolerant::Type::$_" }
+    qw(
+      constant    infinite        less_than
+      more_than   offset          or_less 
+      or_more     plus_or_minus   plus_or_minus_pct
+      to
+    );
 
-__PACKAGE__->enable_plugin($_) for @_default_plugins;
+  __PACKAGE__->enable_plugin($_) for @_default_plugins;
+  $booted = 1;
+}
 
 sub new {
   my $class = shift;
+  $class->_boot_up;
   return unless @_;
   my $self;
 
@@ -184,6 +190,7 @@ If a string can't be parsed, an exception is raised.
 
 sub from_string {
   my ($class, $string) = @_;
+  $class->_boot_up;
   Carp::croak "from_string is a class method" if ref $class;
   for my $type (keys %_plugins) {
     if (defined(my $tolerance = $type->parse($string, $class))) {
