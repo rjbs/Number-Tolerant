@@ -50,7 +50,7 @@ Number::Tolerant class.  Both use the same syntax:
 
  my $range = tolerance( $x => $method => $y);
 
-The meaning of C<$x> and C<$y> are dependant on the value of C<$method>, which
+The meaning of C<$x> and C<$y> are dependent on the value of C<$method>, which
 describes the nature of the tolerance.  Tolerances can be defined in five ways,
 at present:
 
