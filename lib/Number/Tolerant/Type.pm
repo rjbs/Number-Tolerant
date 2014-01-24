@@ -1,9 +1,9 @@
 use strict;
 use warnings;
 package Number::Tolerant::Type;
-use parent qw(Number::Tolerant);
 # ABSTRACT: a type of tolerance
 
+use parent qw(Number::Tolerant);
 use Math::BigFloat;
 use Math::BigRat;
 
