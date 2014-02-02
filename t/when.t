@@ -8,6 +8,7 @@ BEGIN {
       if $^V lt v5.10.0;
 }
 use feature qw<switch>;
+no if $] >= 5.018, warnings => "experimental::smartmatch";
 
 use Number::Tolerant;
 
