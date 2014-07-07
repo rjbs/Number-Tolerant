@@ -23,7 +23,7 @@ check_test(
     ok   => 0, 
     name => '',
     diag => <<END_DIAG,
-given value is outside acceptable tolerances
+given value is below acceptable tolerances
     have: 5
     want: 5 < x
 END_DIAG
@@ -37,7 +37,7 @@ check_test(
     ok   => 0, 
     name => '',
     diag => <<END_DIAG,
-given value is outside acceptable tolerances
+given value is below acceptable tolerances
     have: 5
     want: 5 < x
 END_DIAG
@@ -51,7 +51,7 @@ check_test(
     ok   => 0, 
     name => '',
     diag => <<END_DIAG,
-given value is outside acceptable tolerances
+given value is below acceptable tolerances
     have: 5
     want: 5 < x
 END_DIAG

@@ -410,7 +410,12 @@ use overload
   'bool'   => sub { 1 },
   '0+'     => 'numify',
   '<=>' => sub {
-    $_[2] ? ($_[1] <=> $_[0]->{value}) : ($_[0]->{value} <=> $_[1])
+    my $rv = $_[0] == $_[1] ? 0
+           : $_[0] <  $_[1] ? -1
+           : $_[0] >  $_[1] ? 1
+           : die "impossible";
+    $rv *= -1 if $_[2];
+    return $rv;
   },
   '""' => 'stringify',
   '==' => '_num_eq',

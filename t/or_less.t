@@ -45,7 +45,7 @@ ok(     5.0 >= $guess,    " ... 5.0 is more than or equal to it");
 ok(     5.5 >= $guess,    " ... 5.5 is more than or equal to it");
 ok(     5.6 >= $guess,    " ... 5.6 is more than or equal to it");
 
-is( (4 <=> $guess), -1,   " ... 4 <=> it is -1");
+is( (4 <=> $guess),  0,   " ... 4 <=> it is  0");
 is( (5 <=> $guess),  0,   " ... 5 <=> it is  0");
 is( (6 <=> $guess), +1,   " ... 6 <=> it is +1");
 
@@ -83,7 +83,7 @@ ok(     $guess <= 5.0 ,   " ... it is more than or equal to 5.0");
 ok(     $guess <= 5.5 ,   " ... it is more than or equal to 5.5");
 ok(     $guess <= 5.6 ,   " ... it is more than or equal to 5.6");
 
-is( ( $guess <=> 4 ), +1, " ... 4 <=> it is -1");
+is( ( $guess <=> 4 ),  0, " ... 4 <=> it is  0");
 is( ( $guess <=> 5 ),  0, " ... 5 <=> it is  0");
 is( ( $guess <=> 6 ), -1, " ... 6 <=> it is +1");
 
