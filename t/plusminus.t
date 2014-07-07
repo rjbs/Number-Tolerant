@@ -1,4 +1,4 @@
-use Test::More tests => 48;
+use Test::More;
 
 use strict;
 use warnings;
@@ -37,6 +37,12 @@ is( (4 <=> $guess), -1,   " ... 4 <=> it is -1");
 is( (5 <=> $guess),  0,   " ... 5 <=> it is  0");
 is( (6 <=> $guess), +1,   " ... 6 <=> it is +1");
 
+is( (4.4 <=> $guess), -1,  " ... 4.4 isn't more than it");
+is( (4.5 <=> $guess),  0,  " ... 4.5 is equal to it");
+is( (5.0 <=> $guess),  0,  " ... 5.0 is equal to it");
+is( (5.5 <=> $guess),  0,  " ... 5.5 is equal to it");
+is( (5.6 <=> $guess),  1,  " ... 5.6 is more than it");
+
 # ... and now more of the same, BACKWARDS
 
 ok($guess != 0.0,         " ... it isn't equal to 0.0");
@@ -74,3 +80,5 @@ is( ($guess <=> 6), -1,   " ... 6 <=> it is +1");
   isa_ok($tol, 'Number::Tolerant');
 	is($tol, "10 +/- 2", "plus_or_minus");
 }
+
+done_testing;

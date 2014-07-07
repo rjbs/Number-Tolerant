@@ -35,7 +35,7 @@ ok(     5.6 > $guess,     " ... 5.6 is more than it");
 
 is( (4    <=> $guess), -1, " ... 4    <=> it is -1");
 is( (4.75 <=> $guess),  0, " ... 4.75 <=> it is 0");
-is( (5    <=> $guess), +1, " ... 5    <=> it is +1");
+is( (5    <=> $guess),  0, " ... 5    <=> it is 0");
 is( (6    <=> $guess), +1, " ... 6    <=> it is +1");
 
 # ... and now more of the same, BACKWARDS
@@ -62,7 +62,7 @@ ok(not( $guess > 5.6),    " ... it isn't more than 5.6");
 
 is( ($guess <=> 4   ), +1, " ... 4    <=> it is +1");
 is( ($guess <=> 4.75),  0, " ... 4.75 <=> it is  0");
-is( ($guess <=> 5   ), -1, " ... 5    <=> it is -1");
+is( ($guess <=> 5   ),  0, " ... 5    <=> it is  0");
 is( ($guess <=> 6   ), -1, " ... 6    <=> it is -1");
 
 { # from_string
