@@ -7,7 +7,7 @@ BEGIN {
   plan skip_all => "switch only in Perl 5.10 and newer"
       if $^V lt v5.10.0;
 }
-use feature qw<switch>;
+use if $] >= 5.010, feature => qw<switch>;
 no if $] >= 5.018, warnings => "experimental::smartmatch";
 
 use Number::Tolerant;
