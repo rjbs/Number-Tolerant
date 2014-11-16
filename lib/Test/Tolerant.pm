@@ -17,7 +17,7 @@ package Test::Tolerant;
 
 =head2 is_tol
 
-  is_tol($want, $have_spec, $comment);
+  is_tol($have, $want_spec, $comment);
 
 C<is_tol> is the only routine provided by Test::Tolerant, and is exported by
 default.  It beahves like C<L<is|Test::More/is>> from Test::More, asserting
