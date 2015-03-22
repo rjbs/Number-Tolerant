@@ -1,6 +1,8 @@
 Revision history for Number::Tolerant
 
 {{$NEXT}}
+
+1.706     2015-03-22 12:27:08-04:00 America/New_York
         - do not allow offsets with inverted/broken offset values
 
 1.705     2014-11-16 13:59:01-05:00 America/New_York
