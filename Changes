@@ -1,6 +1,7 @@
 Revision history for Number::Tolerant
 
 {{$NEXT}}
+        - do not allow offsets with inverted/broken offset values
 
 1.705     2014-11-16 13:59:01-05:00 America/New_York
         - correct reversed-order of parameters in documentation for
