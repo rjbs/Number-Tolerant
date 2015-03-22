@@ -35,18 +35,17 @@ sub stringify {
 sub valid_args {
   my $self = shift;
 
-  my $lhs_number   = $self->normalize_number($_[0]);
-  my $minus_number = $self->normalize_number($_[2]);
-  my $plus_number  = $self->normalize_number($_[3]);
+  return if @_ > 4;
+
+  return unless defined(my $lhs_number   = $self->normalize_number($_[0]));
+  return unless defined(my $minus_number = $self->normalize_number($_[2]));
+  return unless defined(my $plus_number  = $self->normalize_number($_[3]));
+
+  return unless $_[1] eq 'offset';
+  return unless $minus_number <= 0;
+  return unless $plus_number  >= 0;
 
   return ($lhs_number, $minus_number, $plus_number)
-    if  (grep { defined } @_) == 4
-    and defined $lhs_number
-    and $_[1] eq 'offset'
-    and defined $minus_number
-    and defined $plus_number;
-
-  return;
 }
 
 1;
