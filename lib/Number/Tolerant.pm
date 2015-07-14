@@ -296,7 +296,7 @@ sub intersection {
   if (defined $_[0]->{min} and defined $_[1]->{min}) {
     ($min) = sort {$b<=>$a}  ($_[0]->{min}, $_[1]->{min});
   } else {
-    $min = $_[0]->{min} || $_[1]->{min};
+    $min = defined $_[0]->{min} ? $_[0]->{min} : $_[1]->{min};
   }
 
   $exclude_min = 1
@@ -306,7 +306,7 @@ sub intersection {
   if (defined $_[0]->{max} and defined $_[1]->{max}) {
     ($max) = sort {$a<=>$b} ($_[0]->{max}, $_[1]->{max});
   } else {
-    $max = $_[0]->{max} || $_[1]->{max};
+    $max = defined $_[0]->{max} ? $_[0]->{max} : $_[1]->{max};
   }
 
   $exclude_max = 1

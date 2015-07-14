@@ -250,3 +250,37 @@ BEGIN { use_ok("Number::Tolerant"); }
   is($range->{min},      undef, ' ... minimum : undef');
   is($range->{max},      undef, ' ... maximum : undef');
 }
+
+{ # min = 0 for first limit
+  my $demand = Number::Tolerant->new(0 => 'or_more');
+  my $offer  = Number::Tolerant->new(10 => 'or_less');
+
+  isa_ok($demand, 'Number::Tolerant');
+  isa_ok($offer,  'Number::Tolerant');
+
+  my $range = $demand & $offer;
+
+  isa_ok($range,   'Number::Tolerant', 'intersection');
+
+  is("$range", '0 <= x <= 10', ' ... stringifies');
+
+  is($range->{min},       0, ' ... minimum :  0');
+  is($range->{max},      10, ' ... maximum : 10');
+}
+
+{ # max = 0 for first limit
+  my $demand = Number::Tolerant->new(0 => 'or_less');
+  my $offer  = Number::Tolerant->new(-5 => 'or_more');
+
+  isa_ok($demand, 'Number::Tolerant');
+  isa_ok($offer,  'Number::Tolerant');
+
+  my $range = $demand & $offer;
+
+  isa_ok($range,   'Number::Tolerant', 'intersection');
+
+  is("$range", '-5 <= x <= 0', ' ... stringifies');
+
+  is($range->{min},      -5, ' ... minimum : -5');
+  is($range->{max},       0, ' ... maximum :  0');
+}
