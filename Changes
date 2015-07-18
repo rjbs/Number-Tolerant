@@ -2,6 +2,10 @@ Revision history for Number::Tolerant
 
 {{$NEXT}}
 
+1.707     2015-07-17 20:36:41-04:00 America/New_York
+        - do not lose a min or max of 0 when intersecting two tolerances
+          (thanks, Michael Carman!)
+
 1.706     2015-03-22 12:27:08-04:00 America/New_York
         - do not allow offsets with inverted/broken offset values
 
