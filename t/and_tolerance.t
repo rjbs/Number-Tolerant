@@ -1,4 +1,4 @@
-use Test::More tests => 91;
+use Test::More;
 
 use strict;
 use warnings;
@@ -284,3 +284,5 @@ BEGIN { use_ok("Number::Tolerant"); }
   is($range->{min},      -5, ' ... minimum : -5');
   is($range->{max},       0, ' ... maximum :  0');
 }
+
+done_testing;
