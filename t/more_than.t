@@ -1,4 +1,4 @@
-use Test::More tests => 70;
+use Test::More tests => 84;
 
 use strict;
 use warnings;
@@ -45,9 +45,17 @@ ok(not( 5.0 >= $guess),   " ... 5.0 isn't more than or equal to it");
 ok(     5.5 >= $guess,    " ... 5.5 is more than or equal to it");
 ok(     5.6 >= $guess,    " ... 5.6 is more than or equal to it");
 
-is( (4 <=> $guess), -1,   " ... 4 <=> it is -1");
-is( (5 <=> $guess),  0,   " ... 5 <=> it is  0");
-is( (6 <=> $guess), +1,   " ... 6 <=> it is +1");
+is( (0.0 <=> $guess), -1, " ... 0.0 <=> it is -1");
+is( (4.4 <=> $guess), -1, " ... 4.4 <=> it is -1");
+is( (4.5 <=> $guess), -1, " ... 4.5 <=> it is -1");
+is( (5.0 <=> $guess), -1, " ... 5.0 <=> it is -1");
+is( (5.5 <=> $guess),  0, " ... 5.5 <=> it is  0");
+is( (5.6 <=> $guess),  0, " ... 5.6 <=> it is  0");
+is( (6.0 <=> $guess),  0, " ... 6.0 <=> it is  0");
+is( (4 <=> $guess), -1,   " ...   4 <=> it is -1");
+is( (5 <=> $guess), -1,   " ...   5 <=> it is -1");
+is( (6 <=> $guess),  0,   " ...   6 <=> it is  0");
+
 
 # ... and now more of the same, BACKWARDS
 
@@ -67,7 +75,7 @@ ok(not( $guess < 5.6),    " ... it isn't less than 5.6");
 
 ok(not( $guess <= 4.4),   " ... it isn't less than or equal 4.4");
 ok(not( $guess <= 4.5),   " ... it isn't less than or equal 4.5");
-ok(not( $guess <= 5.0),   " ... it is less than or equal 5.0");
+ok(not( $guess <= 5.0),   " ... it isn't less than or equal 5.0");
 ok(     $guess <= 5.5,    " ... it is less than or equal 5.5");
 ok(     $guess <= 5.6,    " ... it is less than or equal 5.6");
 
@@ -83,9 +91,16 @@ ok(     $guess >= 5.0,    " ... it is more than or equal 5.0");
 ok(     $guess >= 5.5,    " ... it is more than or equal 5.5");
 ok(     $guess >= 5.6,    " ... it is more than or equal 5.6");
 
-is( ($guess <=> 4), +1,   " ... 4 <=> it is -1");
-is( ($guess <=> 5),  0,   " ... 5 <=> it is  0");
-is( ($guess <=> 6), -1,   " ... 6 <=> it is +1");
+is( ($guess <=> 0.0), +1, " ... 0.0 <=> it is +1");
+is( ($guess <=> 4.4), +1, " ... 4.4 <=> it is +1");
+is( ($guess <=> 4.5), +1, " ... 4.5 <=> it is +1");
+is( ($guess <=> 5.0), +1, " ... 5.0 <=> it is +1");
+is( ($guess <=> 5.5),  0, " ... 5.5 <=> it is  0");
+is( ($guess <=> 5.6),  0, " ... 5.6 <=> it is  0");
+is( ($guess <=> 6.0),  0, " ... 6.0 <=> it is  0");
+is( ($guess <=> 4), +1,   " ...   4 <=> it is +1");
+is( ($guess <=> 5), +1,   " ...   5 <=> it is +1");
+is( ($guess <=> 6), 0,    " ...   6 <=> it is  0");
 
 { # from_string
   { # prosaic

@@ -33,9 +33,9 @@ ok(not( 5.0 > $guess),    " ... 5.0 isn't more than it");
 ok(not( 5.5 > $guess),    " ... 5.5 isn't more than it");
 ok(not( 5.6 > $guess),    " ... 5.6 is more than it");
 
-is( (4 <=> $guess), 1,    " ... 4 <=> it is 0");
-is( (5 <=> $guess), 1,    " ... 5 <=> it is 0");
-is( (6 <=> $guess), 1,    " ... 6 <=> it is 0");
+is( (4 <=> $guess), 0,    " ... 4 <=> it is 0");
+is( (5 <=> $guess), 0,    " ... 5 <=> it is 0");
+is( (6 <=> $guess), 0,    " ... 6 <=> it is 0");
 
 # ... and now more of the same, BACKWARDS
 
@@ -59,9 +59,9 @@ ok(not( $guess > 5.0),    " ... it isn't more than 5.0");
 ok(not( $guess > 5.5),    " ... it isn't more than 5.5");
 ok(not( $guess > 5.6),    " ... it isn't more than 5.6");
 
-is( ($guess <=> 4), -1,   " ... 4 <=> it is 0");
-is( ($guess <=> 5), -1,   " ... 5 <=> it is 0");
-is( ($guess <=> 6), -1,   " ... 6 <=> it is 0");
+is( ($guess <=> 4), 0,    " ... 4 <=> it is 0");
+is( ($guess <=> 5), 0,    " ... 5 <=> it is 0");
+is( ($guess <=> 6), 0,    " ... 6 <=> it is 0");
 
 { # from_string
 	my $tol = Number::Tolerant->from_string("any number");

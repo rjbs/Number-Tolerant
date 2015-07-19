@@ -47,7 +47,7 @@ ok(     5.6 >= $guess,    " ... 5.6 is more than or equal to it");
 
 is( (4 <=> $guess), -1,   " ... 4 <=> it is -1");
 is( (5 <=> $guess),  0,   " ... 5 <=> it is  0");
-is( (6 <=> $guess), +1,   " ... 6 <=> it is +1");
+is( (6 <=> $guess),  0,   " ... 6 <=> it is  0");
 
 # ... and now more of the same, BACKWARDS
 
@@ -85,7 +85,7 @@ ok(     $guess >= 5.6,    " ... it is more than or equal 5.6");
 
 is( ($guess <=> 4), +1,   " ... 4 <=> it is -1");
 is( ($guess <=> 5),  0,   " ... 5 <=> it is  0");
-is( ($guess <=> 6), -1,   " ... 6 <=> it is +1");
+is( ($guess <=> 6),  0,   " ... 6 <=> it is  0");
 
 is($guess->numify, undef, " ... numifies to undef");
 
