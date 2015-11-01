@@ -96,12 +96,12 @@ is($guess->numify, undef, " ... numifies to undef");
     is($tol, "10 <= x", "or_more");
   }
   { # algebraic
-	  my $tol = Number::Tolerant->from_string(">= 10");
+    my $tol = Number::Tolerant->from_string(">= 10");
     isa_ok($tol, 'Number::Tolerant');
     is($tol, "10 <= x", "or_more");
   }
   { # from own notation
-	  my $tol = Number::Tolerant->from_string("10 <= x");
+    my $tol = Number::Tolerant->from_string("10 <= x");
     isa_ok($tol, 'Number::Tolerant');
     is($tol, "10 <= x", "or_more");
   }

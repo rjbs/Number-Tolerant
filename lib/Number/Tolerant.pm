@@ -138,7 +138,7 @@ sub _boot_up {
     map { "Number::Tolerant::Type::$_" }
     qw(
       constant    infinite        less_than
-      more_than   offset          or_less 
+      more_than   offset          or_less
       or_more     plus_or_minus   plus_or_minus_pct
       to
     );
@@ -162,7 +162,7 @@ sub new {
       defined $guts->{min} and defined $guts->{max} and
       $guts->{min} == $guts->{max} and
       not $guts->{constant}
-    ) { 
+    ) {
       @_ = ($class, $guts->{min});
       goto &new;
     }
@@ -471,7 +471,7 @@ defined in Number::Tolerant::Type.  If it does not, an exception is thrown.
 
 =item * Allow translation into forms not originally used:
 
- my $range    = tolerance(9 => to => 17); 
+ my $range    = tolerance(9 => to => 17);
  my $range_pm = $range->convert_to('plus_minus');
  $range->stringify_as('plus_minus_pct');
 

@@ -8,12 +8,12 @@ use Number::Tolerant::Constant;
 
 { # constant (with Constant)
   { # integer
-	  my $tol = Number::Tolerant->from_string("1012");
+    my $tol = Number::Tolerant->from_string("1012");
     isa_ok($tol, 'Number::Tolerant', "real, blessed constant tolerance");
     is($tol, "1012", "constant:  1012");
   }
   { # rational
-	  my $tol = Number::Tolerant->from_string("10.12");
+    my $tol = Number::Tolerant->from_string("10.12");
     isa_ok($tol, 'Number::Tolerant', "real, blessed constant tolerance");
     is($tol, "10.12", "constant: 10.12");
   }

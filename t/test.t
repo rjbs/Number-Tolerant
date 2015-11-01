@@ -20,7 +20,7 @@ check_test(
 check_test(
   sub { is_tol(5, 'x > 5'); },
   {
-    ok   => 0, 
+    ok   => 0,
     name => '',
     diag => <<END_DIAG,
 given value is below acceptable tolerances
@@ -34,7 +34,7 @@ END_DIAG
 check_test(
   sub { is_tol(5, [ qw(more_than 5) ]); },
   {
-    ok   => 0, 
+    ok   => 0,
     name => '',
     diag => <<END_DIAG,
 given value is below acceptable tolerances
@@ -48,7 +48,7 @@ END_DIAG
 check_test(
   sub { is_tol(5, Number::Tolerant->new(qw(more_than 5))); },
   {
-    ok   => 0, 
+    ok   => 0,
     name => '',
     diag => <<END_DIAG,
 given value is below acceptable tolerances
@@ -58,5 +58,5 @@ END_DIAG
   },
   "short, failed comparison"
 );
-  
+
 done_testing;

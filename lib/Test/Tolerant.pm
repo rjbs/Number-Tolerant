@@ -77,7 +77,7 @@ sub is_tol {
   my $why = $cmp == -1 ? "is below"
           : $cmp ==  1 ? "is above"
           :              "is outside";
-  
+
   $Test->diag("given value $why acceptable tolerances");
   $Test->diag(sprintf "%8s: %s\n%8s: %s\n", have => $have, want => $want);
 

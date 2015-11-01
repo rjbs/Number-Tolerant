@@ -56,7 +56,6 @@ is( (4 <=> $guess), -1,   " ...   4 <=> it is -1");
 is( (5 <=> $guess), -1,   " ...   5 <=> it is -1");
 is( (6 <=> $guess),  0,   " ...   6 <=> it is  0");
 
-
 # ... and now more of the same, BACKWARDS
 
 ok($guess != 0.0,         " ... it isn't equal to 0.0");
@@ -107,14 +106,14 @@ is( ($guess <=> 6), 0,    " ...   6 <=> it is  0");
     my $tol = Number::Tolerant->from_string("more than 10");
     isa_ok($tol, 'Number::Tolerant');
     is($tol, "10 < x", "or_more");
-	}
+  }
   { # algebraic
-	  my $tol = Number::Tolerant->from_string("> 10");
+    my $tol = Number::Tolerant->from_string("> 10");
     isa_ok($tol, 'Number::Tolerant');
     is($tol, "10 < x", "more_than");
   }
   { # reverse algebraic
-	  my $tol = Number::Tolerant->from_string("10 < x");
+    my $tol = Number::Tolerant->from_string("10 < x");
     isa_ok($tol, 'Number::Tolerant');
     is($tol, "10 < x", "more_than");
   }

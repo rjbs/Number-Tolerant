@@ -64,7 +64,7 @@ is( ($guess <=> 5), 0,    " ... 5 <=> it is 0");
 is( ($guess <=> 6), 0,    " ... 6 <=> it is 0");
 
 { # from_string
-	my $tol = Number::Tolerant->from_string("any number");
+  my $tol = Number::Tolerant->from_string("any number");
   isa_ok($tol, 'Number::Tolerant');
-	is($tol, "any number", "infinite");
+  is($tol, "any number", "infinite");
 }

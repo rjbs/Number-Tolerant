@@ -64,9 +64,9 @@ is( ($guess <=> 5),  0,   " ... 5 <=> it is  0");
 is( ($guess <=> 6), -1,   " ... 6 <=> it is +1");
 
 { # from_string
-	my $tol = Number::Tolerant->from_string("10 +/- 10%");
+  my $tol = Number::Tolerant->from_string("10 +/- 10%");
   isa_ok($tol, 'Number::Tolerant');
-	is($tol, "10 +/- 10%", " ... stringifies as plus_or_minus_pct");
+  is($tol, "10 +/- 10%", " ... stringifies as plus_or_minus_pct");
 }
 
 { # with a rational

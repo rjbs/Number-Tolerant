@@ -70,15 +70,15 @@ is( ($guess <=> 5),  0,   " ... 5 <=> it is  0");
 is( ($guess <=> 6), -1,   " ... 6 <=> it is +1");
 
 { # from_string
-	my $tol = Number::Tolerant->from_string("10 +/- 2");
+  my $tol = Number::Tolerant->from_string("10 +/- 2");
   isa_ok($tol, 'Number::Tolerant');
-	is($tol, "10 +/- 2", "plus_or_minus");
+  is($tol, "10 +/- 2", "plus_or_minus");
 }
 
 { # from_string
-	my $tol = Number::Tolerant->from_string("10+/-2");
+  my $tol = Number::Tolerant->from_string("10+/-2");
   isa_ok($tol, 'Number::Tolerant');
-	is($tol, "10 +/- 2", "plus_or_minus");
+  is($tol, "10 +/- 2", "plus_or_minus");
 }
 
 done_testing;

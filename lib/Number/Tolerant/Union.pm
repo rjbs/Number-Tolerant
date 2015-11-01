@@ -14,7 +14,7 @@ package Number::Tolerant::Union;
 
  if ($11 == $union) { ... } # this will happen
  if ($12 == $union) { ... } # so will this
- 
+
  if ($13 == $union) { ... } # nothing will happen here
 
  if ($14 == $union) { ... } # this will happen
@@ -44,8 +44,8 @@ in the future.  (For example, the union of "5 to 10" and "7 to 12" is not "5 to
 =cut
 
 sub new {
-	my $class = shift;
-	bless { options => [ @_ ] } => $class;
+  my $class = shift;
+  bless { options => [ @_ ] } => $class;
 }
 
 =head2 options
@@ -55,8 +55,8 @@ This method will return a list of all the acceptable options for the union.
 =cut
 
 sub options {
-	my $self = shift;
-	return @{$self->{options}};
+  my $self = shift;
+  return @{$self->{options}};
 }
 
 =head2 Overloading
@@ -100,34 +100,34 @@ was in the union's ranges and otherwise yields nothing.
 =cut
 
 use overload
-	'0+' => sub { undef },
-	'""' => sub { join(' or ', map { "($_)" } $_[0]->options) },
-	'==' => sub { for ($_[0]->options) { return 1 if $_ == $_[1] } return 0 },
-	'!=' => sub { for ($_[0]->options) { return 0 if $_ == $_[1] } return 1 },
-	'>'  =>
-		sub {
-			if ($_[2]) { for ($_[0]->options) { return 0 unless $_[1] > $_ } return 1 }
-			else       { for ($_[0]->options) { return 0 unless $_[1] < $_ } return 1 }
-		},
-	'<'  =>
-		sub {
-			if ($_[2]) { for ($_[0]->options) { return 0 unless $_[1] < $_ } return 1 }
-			else       { for ($_[0]->options) { return 0 unless $_[1] > $_ } return 1 }
-		},
-	'<=>' =>
-		sub {
-			if ($_[2]) { $_[0] < $_[1] ? 1 : $_[0] > $_[1] ? -1 : 0 }
-			else       { $_[0] > $_[1] ? 1 : $_[0] < $_[1] ? -1 : 0 }
-		},
-	'|' => sub { __PACKAGE__->new($_[0]->options,$_[1]); },
-	'&' => sub {
-		eval { $_[1]->isa('Number::Tolerant') }
-			? __PACKAGE__->new(map { $_ & $_[1] } $_[0]->options )
-			: $_[1] == $_[0]
-				? $_[1]
-				: ();
-		},
-	fallback => 1;
+  '0+' => sub { undef },
+  '""' => sub { join(' or ', map { "($_)" } $_[0]->options) },
+  '==' => sub { for ($_[0]->options) { return 1 if $_ == $_[1] } return 0 },
+  '!=' => sub { for ($_[0]->options) { return 0 if $_ == $_[1] } return 1 },
+  '>'  =>
+    sub {
+      if ($_[2]) { for ($_[0]->options) { return 0 unless $_[1] > $_ } return 1 }
+      else       { for ($_[0]->options) { return 0 unless $_[1] < $_ } return 1 }
+    },
+  '<'  =>
+    sub {
+      if ($_[2]) { for ($_[0]->options) { return 0 unless $_[1] < $_ } return 1 }
+      else       { for ($_[0]->options) { return 0 unless $_[1] > $_ } return 1 }
+    },
+  '<=>' =>
+    sub {
+      if ($_[2]) { $_[0] < $_[1] ? 1 : $_[0] > $_[1] ? -1 : 0 }
+      else       { $_[0] > $_[1] ? 1 : $_[0] < $_[1] ? -1 : 0 }
+    },
+  '|' => sub { __PACKAGE__->new($_[0]->options,$_[1]); },
+  '&' => sub {
+    eval { $_[1]->isa('Number::Tolerant') }
+      ? __PACKAGE__->new(map { $_ & $_[1] } $_[0]->options )
+      : $_[1] == $_[0]
+        ? $_[1]
+        : ();
+    },
+  fallback => 1;
 
 =head1 TODO
 

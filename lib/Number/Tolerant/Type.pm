@@ -78,7 +78,7 @@ sub normalize_number {
   my ($self, $input) = @_;
 
   return if not defined $input;
-  
+
   if ($input =~ qr{\A$number\z}) {
     return $input =~ m{/} ? Math::BigRat->new($input) : $input;
     # my $class = $input =~ m{/} ? 'Math::BigRat' : 'Math::BigRat';

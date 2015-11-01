@@ -94,12 +94,12 @@ is( ( $guess <=> 6 ), -1, " ... 6 <=> it is +1");
     is($tol, "x < 10", "or_less");
   }
   { # algebraic
-	  my $tol = Number::Tolerant->from_string("< 10");
+    my $tol = Number::Tolerant->from_string("< 10");
     isa_ok($tol, 'Number::Tolerant');
     is($tol, "x < 10", "less_than");
   }
   { # reverse algebraic
-	  my $tol = Number::Tolerant->from_string("10 > x");
+    my $tol = Number::Tolerant->from_string("10 > x");
     isa_ok($tol, 'Number::Tolerant');
     is($tol, "x < 10", "less_than");
   }

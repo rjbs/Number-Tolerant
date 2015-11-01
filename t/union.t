@@ -16,16 +16,16 @@ my $choice = $alpha | $beta;
 isa_ok($choice,   'Number::Tolerant::Union', 'union');
 
 is_deeply(
-	[ $choice->options ],
-	[ $alpha, $beta ],
-	' ... options are as requested'
+  [ $choice->options ],
+  [ $alpha, $beta ],
+  ' ... options are as requested'
 );
 
 is("$choice", '(4.5 <= x <= 5.25) or (5.75 <= x <= 6.25)', ' ... stringifies');
 
 {
-	no warnings 'uninitialized';
-	is(0+$choice, 0,           " ... plus zero, it's zero");
+  no warnings 'uninitialized';
+  is(0+$choice, 0,           " ... plus zero, it's zero");
 }
 
 ok(0.0 != $alpha,          " ... 0.0 isn't equal to alpha option");
