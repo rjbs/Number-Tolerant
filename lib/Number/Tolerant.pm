@@ -430,13 +430,6 @@ use overload
 
 =back
 
-=head2 Infinite
-
-In tolerances, the use of 'infinite' (C<< Number::Tolerant->new('infinite') >>)
-does not indicate "a number higher than any other", but rather "any number is
-acceptable". Therefore, any number or range of numbers compared to 'infinite'
-will produce a true result for equality checks, and false for inequality checks.
-
 =head1 EXTENDING
 
 This feature is slighly experimental, but it's here.
