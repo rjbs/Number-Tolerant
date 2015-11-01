@@ -2,6 +2,13 @@ Revision history for Number::Tolerant
 
 {{$NEXT}}
 
+1.708     2015-11-01 14:33:27-05:00 America/New_York
+        [MAYBE JUST POSSIBLY A BREAKING CHANGE]
+        - ...but probably not
+        - fix the <=> operator to behave more predictably
+        - now implemented in terms of ==, <, and >
+        - thanks, Karen Etheridge!
+
 1.707     2015-07-17 20:36:41-04:00 America/New_York
         - do not lose a min or max of 0 when intersecting two tolerances
           (thanks, Michael Carman!)
