@@ -1,6 +1,8 @@
 Revision history for Number::Tolerant
 
 {{$NEXT}}
+
+1.711     2024-09-29 16:41:41-04:00 America/New_York (TRIAL RELEASE)
         [BREAKING CHANGE]
         - entirely drop support for ~~ overloading
 
